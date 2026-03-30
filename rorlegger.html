@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Profesjonell rørlegger i Oslo området. 24/7 vakt, lekkasjesøk, bad og våtrom, varmepumper. Rask hjelp - ring oss i dag!">
+  <title>Rørlegger Nikolai AS | Profesjonell rørleggertjeneste</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0a3d62;
+      --primary-dark: #052c48;
+      --accent: #3c9eff;
+      --accent-light: #acd1f9;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Animasjoner */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+    }
+
+    .animate-on-scroll.visible {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    /* Header */
+    header {
+      background: rgba(10, 61, 98, 0.95);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: var(--accent-light);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 100px 5%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>') repeat;
+      opacity: 0.3;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .btn {
+      background: white;
+      color: var(--primary);
+      padding: 14px 32px;
+      margin: 8px;
+      display: inline-block;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #2c7be5;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* Section styling */
+    .section {
+      padding: 80px 5%;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-header p {
+      color: var(--text-light);
+      font-size: 1.1rem;
+    }
+
+    /* Grid layouts */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card, .insurance-card {
+      background: var(--card);
+      padding: 35px 25px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before, .insurance-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover::before, .insurance-card:hover::before {
+      transform: translateX(0);
+    }
+
+    .service-card:hover, .insurance-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .service-card i, .insurance-card i {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .service-card h3, .insurance-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+
+    /* Price Section */
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .price-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .price-card.featured {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-xl);
+      border: 2px solid var(--accent);
+    }
+
+    .price-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .price-card.featured:hover {
+      transform: translateY(-10px) scale(1.05);
+    }
+
+    .price-badge {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--accent);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 20px 0;
+    }
+
+    .price small {
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+
+    .price-card ul {
+      list-style: none;
+      margin: 20px 0;
+    }
+
+    .price-card li {
+      padding: 8px 0;
+      color: var(--text-light);
+    }
+
+    .price-card li i {
+      color: var(--success);
+      margin-right: 10px;
+    }
+
+    /* Review Section */
+    .review-slider {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .review-card {
+      background: var(--card);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      animation: scaleIn 0.6s ease;
+    }
+
+    .review-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .stars {
+      color: #fbbf24;
+      margin-bottom: 15px;
+    }
+
+    .review-text {
+      font-style: italic;
+      margin-bottom: 20px;
+      color: var(--text-light);
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .reviewer i {
+      font-size: 2rem;
+      color: var(--accent);
+    }
+
+    /* Map Section */
+    .map-container {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: all 0.3s ease;
+    }
+
+    .map-container:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-xl);
+    }
+
+    iframe {
+      width: 100%;
+      height: 450px;
+      border: 0;
+    }
+
+    /* Contact Info */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .contact-info-card {
+      background: var(--card);
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .contact-info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact-info-card i {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+
+    /* Form styling */
+    .form-container {
+      background: var(--card);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(60, 158, 255, 0.1);
+    }
+
+    button {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 50px 5% 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h4 {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .footer-section a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 10px;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      opacity: 1;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .section {
+        padding: 50px 5%;
+      }
+      
+      .price-card.featured {
+        transform: scale(1);
+      }
+      
+      .price-card.featured:hover {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1><i class="fas fa-wrench"></i> Rørlegger Nikolai AS</h1>
+  <nav>
+    <a href="#hjem">Hjem</a>
+    <a href="#tjenester">Tjenester</a>
+    <a href="#priser">Priser</a>
+    <a href="#forsikring">Forsikring</a>
+    <a href="#bestill">Bestill</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+</header>
+
+<section id="hjem" class="hero">
+  <div class="hero-content">
+    <h2>Profesjonell rørlegger – 24/7 hjelp</h2>
+    <p>Rask, pålitelig og sertifisert rørleggertjeneste i hele Oslo-området</p>
+    <a href="#bestill" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Bestill time nå</a>
+    <a href="tel:12345678" class="btn btn-outline"><i class="fas fa-phone"></i> Ring oss: 12345678</a>
+  </div>
+</section>
+
+<section id="tjenester" class="section">
+  <div class="section-header">
+    <h2>Våre tjenester</h2>
+    <p>Vi tilbyr komplett rørleggertjenester med garanti</p>
+  </div>
+  <div class="grid">
+    <div class="service-card animate-on-scroll">
+      <i class="fas fa-bath"></i>
+      <h3>Bad og våtrom</h3>
+      <p>Komplett baderomsrenovering, flislegging og våtromsikring</p>
+    </div>
+    <div class="service-card animate-on-scroll">
+      <i class="fas fa-temperature-high"></i>
+      <h3>Varmepumper</h3>
+      <p>Installasjon og service av varmepumper for optimal oppvarming</p>
+    </div>
+    <div class="service-card animate-on-scroll">
+      <i class="fas fa-tint"></i>
+      <h3>Lekkasjesøk</h3>
+      <p>Avansert utstyr for nøyaktig lekkasjelokalisering</p>
+    </div>
+    <div class="service-card animate-on-scroll">
+      <i class="fas fa-exchange-alt"></i>
+      <h3>Rørfornying</h3>
+      <p>Moderne metoder for rørutskifting uten graving</p>
+    </div>
+    <div class="service-card animate-on-scroll">
+      <i class="fas fa-toilet"></i>
+      <h3>Toalettinstallasjon</h3>
+      <p>Montering og reparasjon av toaletter og sanitærutstyr</p>
+    </div>
+    <div class="service-card animate-on-scroll">
+      <i class="fas fa-snowplow"></i>
+      <h3>24/7 Vakt</h3>
+      <p>Akutthjelp døgnet rundt, hele året</p>
+    </div>
+  </div>
+</section>
+
+<section id="priser" class="section" style="background: linear-gradient(135deg, #f8fafc 0%, #eef2f6 100%);">
+  <div class="section-header">
+    <h2>Prisinformasjon</h2>
+    <p>Gjennomsiktige priser – ingen skjulte kostnader</p>
+  </div>
+  <div class="price-grid">
+    <div class="price-card animate-on-scroll">
+      <h3>Vanlig timepris</h3>
+      <div class="price">kr 950 <small>/time</small></div>
+      <ul>
+        <li><i class="fas fa-check"></i> Inkluderer reisevei innen 15km</li>
+        <li><i class="fas fa-check"></i> MVA inkludert</li>
+        <li><i class="fas fa-check"></i> Materialer kommer i tillegg</li>
+      </ul>
+      <a href="#bestill" class="btn btn-primary">Bestill time</a>
+    </div>
+    <div class="price-card featured animate-on-scroll">
+      <div class="price-badge">Mest populær</div>
+      <h3>Akutt - 24/7</h3>
+      <div class="price">kr 1250 <small>/time</small></div>
+      <ul>
+        <li><i class="fas fa-check"></i> 24/7 tilgjengelighet</li>
+        <li><i class="fas fa-check"></i> 1 times respons tid</li>
+        <li><i class="fas fa-check"></i> Inkluderer kjøring</li>
+        <li><i class="fas fa-check"></i> Ingen skjulte gebyrer</li>
+      </ul>
+      <a href="#bestill" class="btn btn-primary">Ring akutt</a>
+    </div>
+    <div class="price-card animate-on-scroll">
+      <h3>Fastpris oppdrag</h3>
+      <div class="price">Fra kr 1500</div>
+      <ul>
+        <li><i class="fas fa-check"></i> Toalettbytte: kr 2500</li>
+        <li><i class="fas fa-check"></i> Blandebatteri: kr 1800</li>
+        <li><i class="fas fa-check"></i> Sikring av våtrom: fra kr 5000</li>
+      </ul>
+      <a href="#bestill" class="btn btn-primary">Be om tilbud</a>
+    </div>
+  </div>
+</section>
+
+<section id="forsikring" class="section">
+  <div class="section-header">
+    <h2>Forsikringsselskaper vi samarbeider med</h2>
+    <p>Direkte oppgjør med de fleste forsikringsselskaper</p>
+  </div>
+  <div class="grid">
+    <div class="insurance-card animate-on-scroll">
+      <i class="fas fa-shield-alt"></i>
+      <h3>Gjensidige</h3>
+      <p>Direkteoppgjør for alle skadesaker</p>
+    </div>
+    <div class="insurance-card animate-on-scroll">
+      <i class="fas fa-building"></i>
+      <h3>If Skadeforsikring</h3>
+      <p>Godkjent samarbeidspartner</p>
+    </div>
+    <div class="insurance-card animate-on-scroll">
+      <i class="fas fa-handshake"></i>
+      <h3>SpareBank 1 Forsikring</h3>
+      <p>Automatisk skadebehandling</p>
+    </div>
+    <div class="insurance-card animate-on-scroll">
+      <i class="fas fa-chart-line"></i>
+      <h3>Frende Forsikring</h3>
+      <p>Rask og effektiv saksbehandling</p>
+    </div>
+    <div class="insurance-card animate-on-scroll">
+      <i class="fas fa-leaf"></i>
+      <h3>Tryg Forsikring</h3>
+      <p>Godkjent rørlegger i deres nettverk</p>
+    </div>
+    <div class="insurance-card animate-on-scroll">
+      <i class="fas fa-umbrella"></i>
+      <h3>Storebrand</h3>
+      <p>Forhåndsgodkjente priser</p>
+    </div>
+  </div>
+</section>
+
+<section id="anmeldelser" class="section">
+  <div class="section-header">
+    <h2>Hva våre kunder sier</h2>
+    <p>Over 500 fornøyde kunder i Oslo-området</p>
+  </div>
+  <div class="review-slider">
+    <div class="review-card animate-on-scroll">
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+      <p class="review-text">"Ekstremt rask respons! Fikset lekkasjen på under en time. Profesjonell og hyggelig service. Anbefales på det varmeste!"</p>
+      <div class="reviewer">
+        <i class="fas fa-user-circle"></i>
+        <div>
+          <strong>Kari Nordmann</strong>
+          <small>Oslo</small>
+        </div>
+      </div>
+    </div>
+    <div class="review-card animate-on-scroll">
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+      <p class="review-text">"Renoverte hele badet vårt. Flott arbeid, god kommunikasjon og holdt tidsplanen. Veldig fornøyd med resultatet!"</p>
+      <div class="reviewer">
+        <i class="fas fa-user-circle"></i>
+        <div>
+          <strong>Per Hansen</strong>
+          <small>Bærum</small>
+        </div>
+      </div>
+    </div>
+    <div class="review-card animate-on-scroll">
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+      <p class="review-text">"Fant lekkasjen vi ikke fant selv på 2 uker. Rimelig pris og god oppfølging. Kommer til å bruke dem igjen!"</p>
+      <div class="reviewer">
+        <i class="fas fa-user-circle"></i>
+        <div>
+          <strong>Ingrid Olsen</strong>
+          <small>Lørenskog</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bestill" class="section">
+  <div class="section-header">
+    <h2>Bestill time</h2>
+    <p>Fyll ut skjemaet så kontakter vi deg innen 30 minutter</p>
+  </div>
+  <div class="form-container">
+    <form id="bookingForm">
+      <div class="form-group">
+        <input type="text" placeholder="Fullt navn" required>
+      </div>
+      <div class="form-group">
+        <input type="tel" placeholder="Telefonnummer" required>
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="E-postadresse">
+      </div>
+      <div class="form-group">
+        <input type="text" placeholder="Adresse">
+      </div>
+      <div class="form-group">
+        <select required>
+          <option value="">Velg type oppdrag</option>
+          <option>Lekkasje / akutt</option>
+          <option>Bad og våtrom</option>
+          <option>Varmepumpe</option>
+          <option>Rørfornying</option>
+          <option>Toalett / sanitær</option>
+          <option>Annet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <textarea rows="4" placeholder="Beskriv oppdraget ditt"></textarea>
+      </div>
+      <button type="submit"><i class="fas fa-paper-plane"></i> Send forespørsel</button>
+    </form>
+  </div>
+</section>
+
+<section id="kontakt" class="section">
+  <div class="section-header">
+    <h2>Kontakt oss</h2>
+    <p>Vi er her for å hjelpe deg - ring eller besøk oss</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info-card animate-on-scroll">
+      <i class="fas fa-map-marker-alt"></i>
+      <h3>Adresse</h3>
+      <p>Eksempelgata 1<br>0160 Oslo</p>
+    </div>
+    <div class="contact-info-card animate-on-scroll">
+      <i class="fas fa-phone"></i>
+      <h3>Telefon</h3>
+      <p><a href="tel:12345678" style="color: var(--primary);">12345678</a><br>24/7 akutt</p>
+    </div>
+    <div class="contact-info-card animate-on-scroll">
+      <i class="fas fa-envelope"></i>
+      <h3>E-post</h3>
+      <p>post@rorlegger-nikolai.no<br>Vi svarer innen 1 time</p>
+    </div>
+    <div class="contact-info-card animate-on-scroll">
+      <i class="fas fa-clock"></i>
+      <h3>Åpningstider</h3>
+      <p>Man-Fre: 08:00 - 20:00<br>Lør-Søn: Akuttberedskap</p>
+    </div>
+  </div>
+  
+  <div class="map-container animate-on-scroll">
+    <iframe 
+      src="https://www.openstreetmap.org/export/embed.html?bbox=10.735%2C59.913%2C10.745%2C59.923&layer=mapnik&marker=59.918%2C10.740" 
+      allowfullscreen="" 
+      loading="lazy">
+    </iframe>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-section">
+      <h4><i class="fas fa-wrench"></i> Rørlegger Nikolai AS</h4>
+      <p>Vi er en sertifisert rørleggervirksomhet med over 10 års erfaring i Oslo-området. Kvalitet, pålitelighet og raske responser er våre kjernverdier.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div class="footer-section">
+      <h4>Rask kontakt</h4>
+      <a href="tel:12345678"><i class="fas fa-phone"></i> 12345678</a>
+      <a href="mailto:post@rorlegger-nikolai.no"><i class="fas fa-envelope"></i> post@rorlegger-nikolai.no</a>
+      <a href="#"><i class="fas fa-comments"></i> Chat med oss</a>
+    </div>
+    <div class="footer-section">
+      <h4>Åpningstider</h4>
+      <p>Mandag - Fredag: 08:00 - 20:00</p>
+      <p>Lørdag: Akuttberedskap</p>
+      <p>Søndag: Akuttberedskap</p>
+      <p><strong>24/7 akutt-telefon: 12345678</strong></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Rørlegger Nikolai AS | Org.nr: 123 456 789 | Alle rettigheter reservert</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll animasjoner
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Smooth scrolling for alle interne lenker
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Form submit handling
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Takk for henvendelsen! Vi kontakter deg innen kort tid.');
+    this.reset();
+  });
+
+  // Sticky header effect
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 100) {
+      header.style.background = 'rgba(10, 61, 98, 0.98)';
+      header.style.padding = '10px 5%';
+    } else {
+      header.style.background = 'rgba(10, 61, 98, 0.95)';
+      header.style.padding = '15px 5%';
+    }
+  });
+</script>
+
+</body>
+</html>
