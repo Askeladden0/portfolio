@@ -25,11 +25,7 @@
       --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -39,82 +35,21 @@
       overflow-x: hidden;
     }
 
-    /* Animasjoner */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+    /* ── Map ── */
+    .map-container { border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lg); position: relative; }
+    .map-container iframe { width: 100%; height: 340px; border: none; display: block; }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    /* ── Animations ── */
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes scaleIn  { from { opacity:0; transform:scale(0.9); }       to { opacity:1; transform:scale(1); } }
+    @keyframes float    { 0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)} }
 
-    @keyframes fadeInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
+    .animate-on-scroll { opacity: 0; }
+    .animate-on-scroll.visible { animation: fadeInUp 0.8s ease forwards; }
 
-    @keyframes fadeInRight {
-      from {
-        opacity: 0;
-        transform: translateX(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes scaleIn {
-      from {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    @keyframes shimmer {
-      0% { background-position: -1000px 0; }
-      100% { background-position: 1000px 0; }
-    }
-
-    .animate-on-scroll {
-      opacity: 0;
-    }
-
-    .animate-on-scroll.visible {
-      animation: fadeInUp 0.8s ease forwards;
-    }
-
-    /* Header */
+    /* ── Header ── */
     header {
-      background: rgba(10, 61, 98, 0.95);
+      background: rgba(10,61,98,0.95);
       backdrop-filter: blur(10px);
       color: white;
       padding: 15px 5%;
@@ -127,495 +62,365 @@
       box-shadow: var(--shadow-md);
       transition: all 0.3s ease;
     }
-
     header h1 {
       font-size: 1.5rem;
       font-weight: 700;
-      background: linear-gradient(135deg, #fff, var(--accent-light));
+      background: linear-gradient(135deg,#fff,var(--accent-light));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    nav { display:flex; gap:2rem; }
+    nav a { color:white; text-decoration:none; font-weight:500; transition:all 0.3s; position:relative; }
+    nav a::after { content:''; position:absolute; bottom:-5px; left:0; width:0; height:2px; background:var(--accent); transition:width 0.3s; }
+    nav a:hover::after { width:100%; }
+    nav a:hover { color:var(--accent-light); }
 
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width 0.3s ease;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    nav a:hover {
-      color: var(--accent-light);
-    }
-
-    /* Hero Section */
+    /* ── Hero ── */
     .hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      background: linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
       color: white;
-      padding: 100px 5%;
-      text-align: center;
+      padding: 80px 5%;
       position: relative;
       overflow: hidden;
     }
-
     .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      content:'';
+      position:absolute; top:0; left:0; right:0; bottom:0;
       background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>') repeat;
-      opacity: 0.3;
+      opacity:0.3;
       animation: float 20s ease-in-out infinite;
     }
-
-    .hero-content {
+    .hero-inner {
       position: relative;
       z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      max-width: 1200px;
+      margin: auto;
       animation: fadeInUp 1s ease;
     }
+    .hero-text { flex: 1; }
+    .hero-text h2 { font-size: 2.8rem; margin-bottom: 20px; font-weight: 800; line-height: 1.2; }
+    .hero-text p  { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
 
-    .hero h2 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      font-weight: 800;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
-      opacity: 0.9;
-    }
-
-    .btn {
-      background: white;
-      color: var(--primary);
-      padding: 14px 32px;
-      margin: 8px;
-      display: inline-block;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-md);
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #2c7be5;
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-xl);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 2px solid white;
-      color: white;
-    }
-
-    .btn-outline:hover {
-      background: white;
-      color: var(--primary);
-      transform: translateY(-3px);
-    }
-
-    /* Section styling */
-    .section {
-      padding: 80px 5%;
-      max-width: 1400px;
-      margin: auto;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .section-header h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .section-header p {
-      color: var(--text-light);
-      font-size: 1.1rem;
-    }
-
-    /* Grid layouts */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .service-card, .insurance-card {
-      background: var(--card);
-      padding: 35px 25px;
-      border-radius: 20px;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.3s ease;
-      text-align: center;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-card::before, .insurance-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--accent), var(--primary));
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-    }
-
-    .service-card:hover::before, .insurance-card:hover::before {
-      transform: translateX(0);
-    }
-
-    .service-card:hover, .insurance-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-xl);
-    }
-
-    .service-card i, .insurance-card i {
-      font-size: 3rem;
-      color: var(--accent);
-      margin-bottom: 20px;
-    }
-
-    .service-card h3, .insurance-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 15px;
-      color: var(--primary);
-    }
-
-    /* Price Section */
-    .price-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-    }
-
-    .price-card {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-    }
-
-    .price-card.featured {
-      transform: scale(1.05);
-      box-shadow: var(--shadow-xl);
-      border: 2px solid var(--accent);
-    }
-
-    .price-card:hover {
-      transform: translateY(-10px);
-    }
-
-    .price-card.featured:hover {
-      transform: translateY(-10px) scale(1.05);
-    }
-
-    .price-badge {
-      position: absolute;
-      top: -12px;
-      right: 20px;
-      background: var(--accent);
-      color: white;
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    .price {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin: 20px 0;
-    }
-
-    .price small {
-      font-size: 1rem;
-      color: var(--text-light);
-    }
-
-    .price-card ul {
-      list-style: none;
-      margin: 20px 0;
-    }
-
-    .price-card li {
-      padding: 8px 0;
-      color: var(--text-light);
-    }
-
-    .price-card li i {
-      color: var(--success);
-      margin-right: 10px;
-    }
-
-    /* Review Section */
-    .review-slider {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .review-card {
-      background: var(--card);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.3s ease;
-      animation: scaleIn 0.6s ease;
-    }
-
-    .review-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .stars {
-      color: #fbbf24;
-      margin-bottom: 15px;
-    }
-
-    .review-text {
-      font-style: italic;
-      margin-bottom: 20px;
-      color: var(--text-light);
-    }
-
-    .reviewer {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .reviewer i {
-      font-size: 2rem;
-      color: var(--accent);
-    }
-
-    /* Map Section */
-    .map-container {
+    /* ── Hero photo placeholder ── */
+    .hero-photo {
+      flex-shrink: 0;
+      width: 260px;
+      height: 320px;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      transition: all 0.3s ease;
-    }
-
-    .map-container:hover {
-      transform: scale(1.02);
-      box-shadow: var(--shadow-xl);
-    }
-
-    iframe {
-      width: 100%;
-      height: 450px;
-      border: 0;
-    }
-
-    /* Contact Info */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-bottom: 40px;
-    }
-
-    .contact-info-card {
-      background: var(--card);
-      padding: 25px;
-      border-radius: 20px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .contact-info-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .contact-info-card i {
-      font-size: 2.5rem;
-      color: var(--accent);
-      margin-bottom: 15px;
-    }
-
-    /* Form styling */
-    .form-container {
-      background: var(--card);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 14px;
-      border: 2px solid #e2e8f0;
-      border-radius: 12px;
-      font-family: inherit;
-      transition: all 0.3s ease;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(60, 158, 255, 0.1);
-    }
-
-    button {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: white;
-      padding: 14px 32px;
-      border: none;
-      border-radius: 50px;
+      border: 4px solid rgba(255,255,255,0.25);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
       cursor: pointer;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s ease;
+      position: relative;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(4px);
+    }
+    .hero-photo img {
       width: 100%;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    /* Footer */
-    footer {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-      color: white;
-      padding: 50px 5% 20px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-
-    .footer-section h4 {
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-    }
-
-    .footer-section a {
-      color: white;
-      text-decoration: none;
+      height: 100%;
+      object-fit: cover;
       display: block;
-      margin-bottom: 10px;
-      opacity: 0.8;
-      transition: opacity 0.3s ease;
-    }
 
-    .footer-section a:hover {
-      opacity: 1;
+    
     }
-
-    .social-links {
+    /* shown when no src is set */
+    .hero-photo .photo-placeholder {
       display: flex;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .social-links a {
-      width: 40px;
-      height: 40px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 50%;
-      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
-    }
-
-    .social-links a:hover {
-      background: var(--accent);
-      transform: translateY(-3px);
-    }
-
-    .footer-bottom {
+      height: 100%;
+      gap: 12px;
+      color: rgba(255,255,255,0.7);
       text-align: center;
-      padding-top: 30px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 20px;
+      pointer-events: none;
+    }
+    .hero-photo .photo-placeholder i { font-size: 3rem; }
+    .hero-photo .photo-placeholder p { font-size: 0.9rem; line-height: 1.5; }
+    .hero-photo input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-photo:hover { border-color: rgba(255,255,255,0.5); }
+    .hero-photo:hover .photo-placeholder { color: white; }
+
+    .btn { display:inline-block; padding:14px 32px; margin:8px; border-radius:50px; font-weight:600; text-decoration:none; transition:all 0.3s; box-shadow:var(--shadow-md); }
+    .btn-primary  { background:var(--accent); color:white; }
+    .btn-primary:hover  { background:#2c7be5; transform:translateY(-3px); box-shadow:var(--shadow-xl); }
+    .btn-outline  { background:transparent; border:2px solid white; color:white; }
+    .btn-outline:hover  { background:white; color:var(--primary); transform:translateY(-3px); }
+
+    /* ── Sections ── */
+    .section { padding:80px 5%; max-width:1400px; margin:auto; }
+    .section-header { text-align:center; margin-bottom:50px; }
+    .section-header h2 {
+      font-size:2.5rem; font-weight:700; margin-bottom:15px;
+      background: linear-gradient(135deg,var(--primary),var(--accent));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .section-header p { color:var(--text-light); font-size:1.1rem; }
+
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
+
+    /* ── Service cards with image placeholder ── */
+    .service-card {
+      background: var(--card);
+      border-radius: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .service-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:4px;
+      background: linear-gradient(90deg,var(--accent),var(--primary));
+      transform: translateX(-100%); transition: transform 0.3s;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        gap: 15px;
-      }
-      
-      nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-      }
-      
-      .hero h2 {
-        font-size: 2rem;
-      }
-      
-      .section {
-        padding: 50px 5%;
-      }
-      
-      .price-card.featured {
-        transform: scale(1);
-      }
-      
-      .price-card.featured:hover {
-        transform: translateY(-10px);
-      }
+
+    .service-img-wrap {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg,#e8f4fd,#c8e6fa);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .service-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .service-img-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .service-img-placeholder i { font-size: 2.5rem; }
+    .service-img-placeholder span { font-size: 0.8rem; color: var(--text-light); }
+    .service-img-wrap input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .service-img-wrap:hover { background: linear-gradient(135deg,#d0e9fc,#b0d8f7); }
+
+    .service-body { padding: 25px; text-align:center; }
+    .service-body h3 { font-size:1.3rem; margin-bottom:10px; color:var(--primary); }
+    .service-body p  { color:var(--text-light); }
+
+    /* ── Price ── */
+    .price-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; }
+    .price-card { background:var(--card); border-radius:20px; padding:30px; text-align:center; transition:all 0.3s; box-shadow:var(--shadow-sm); position:relative; }
+    .price-card.featured { transform:scale(1.05); box-shadow:var(--shadow-xl); border:2px solid var(--accent); }
+    .price-card:hover { transform:translateY(-10px); }
+    .price-card.featured:hover { transform:translateY(-10px) scale(1.05); }
+    .price-badge { position:absolute; top:-12px; right:20px; background:var(--accent); color:white; padding:5px 15px; border-radius:20px; font-size:0.85rem; font-weight:600; }
+    .price { font-size:2.5rem; font-weight:800; color:var(--primary); margin:20px 0; }
+    .price small { font-size:1rem; color:var(--text-light); }
+    .price-card ul { list-style:none; margin:20px 0; }
+    .price-card li { padding:8px 0; color:var(--text-light); }
+    .price-card li i { color:var(--success); margin-right:10px; }
+
+    /* ── Reviews ── */
+    .review-slider { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
+    .review-card { background:var(--card); padding:30px; border-radius:20px; box-shadow:var(--shadow-sm); transition:all 0.3s; animation:scaleIn 0.6s ease; }
+    .review-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+    .stars { color:#fbbf24; margin-bottom:15px; }
+    .review-text { font-style:italic; margin-bottom:20px; color:var(--text-light); }
+    .reviewer { display:flex; align-items:center; gap:10px; }
+    .reviewer i { font-size:2rem; color:var(--accent); }
+
+    /* ── About ── */
+    .about-section {
+      background: linear-gradient(135deg,var(--primary-dark),var(--primary));
+      color: white;
+      padding: 80px 5%;
+    }
+    .about-inner {
+      max-width: 1200px;
+      margin: auto;
+    }
+    .about-inner .section-header h2 {
+      background: linear-gradient(135deg,#fff,var(--accent-light));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .about-inner .section-header p { color: rgba(255,255,255,0.7); }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+    .about-text { display:flex; flex-direction:column; gap:20px; }
+    .about-text p { color: rgba(255,255,255,0.85); line-height: 1.8; font-size: 1.05rem; }
+    /* Editable text hint */
+    .about-text p[contenteditable="true"] {
+      border: 1px dashed rgba(255,255,255,0.3);
+      border-radius: 8px;
+      padding: 10px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .about-text p[contenteditable="true"]:focus { border-color: var(--accent-light); }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 10px;
+    }
+    .stat-box {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .stat-box .stat-num { font-size: 2.2rem; font-weight: 800; color: var(--accent-light); }
+    .stat-box .stat-label { font-size: 0.9rem; color: rgba(255,255,255,0.65); margin-top: 4px; }
+
+    .about-images { display:flex; flex-direction:column; gap:20px; }
+    .about-img-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+
+    /* Image placeholder boxes for About */
+    .img-placeholder-box {
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      background: rgba(255,255,255,0.08);
+      border: 2px dashed rgba(255,255,255,0.25);
+      transition: border-color 0.2s;
+    }
+    .img-placeholder-box:hover { border-color: var(--accent-light); }
+    .img-placeholder-box.tall { aspect-ratio: 3/4; }
+    .img-placeholder-box.wide { aspect-ratio: 16/9; grid-column: 1/-1; }
+    .img-placeholder-box.square { aspect-ratio: 1; }
+
+    .img-placeholder-box img {
+      width:100%; height:100%; object-fit:cover; display:none;
+      border-radius: 12px;
+    }
+    .img-placeholder-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-height: 120px;
+      gap: 8px;
+      color: rgba(255,255,255,0.5);
+      padding: 16px;
+      text-align: center;
+      pointer-events: none;
+    }
+    .img-placeholder-inner i { font-size: 1.8rem; }
+    .img-placeholder-inner span { font-size: 0.78rem; }
+    .img-placeholder-box input[type="file"] {
+      position:absolute; inset:0; opacity:0; cursor:pointer;
+    }
+
+    /* ── Contact ── */
+    .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; margin-bottom:40px; }
+    .contact-info-card { background:var(--card); padding:25px; border-radius:20px; text-align:center; transition:all 0.3s; }
+    .contact-info-card i { font-size:2.5rem; color:var(--accent); margin-bottom:15px; }
+
+    /* ── Booking Form ── */
+    .booking-section { background: linear-gradient(135deg,#f0f7ff,#e8f4fd); }
+    .booking-section .section-header h2 {
+      background: linear-gradient(135deg,var(--primary),var(--accent));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .form-container { background:var(--card); padding:40px; border-radius:24px; box-shadow:var(--shadow-lg); max-width:700px; margin:0 auto; }
+    .form-note {
+      background: #e8f4fd;
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 28px;
+      font-size: 0.9rem;
+      color: var(--primary);
+    }
+    .form-note code {
+      background: rgba(10,61,98,0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .form-group { display:flex; flex-direction:column; gap:6px; }
+    .form-group.full { grid-column:1/-1; }
+    .form-group label { font-size:0.9rem; font-weight:600; color:var(--primary); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width:100%; padding:13px 16px;
+      border:2px solid #e2e8f0; border-radius:12px;
+      font-family:inherit; font-size:1rem;
+      transition:all 0.3s;
+      background: #fafcff;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline:none; border-color:var(--accent);
+      box-shadow: 0 0 0 3px rgba(60,158,255,0.1);
+      background: white;
+    }
+    .form-group textarea { resize:vertical; min-height:120px; }
+
+    .submit-btn {
+      background: linear-gradient(135deg,var(--primary),var(--accent));
+      color:white; padding:15px 32px; border:none; border-radius:50px;
+      cursor:pointer; font-weight:700; font-size:1rem;
+      transition:all 0.3s; width:100%; margin-top:10px;
+      letter-spacing: 0.3px;
+    }
+    .submit-btn:hover { transform:translateY(-2px); box-shadow:var(--shadow-lg); }
+
+    /* ── Footer ── */
+    footer { background:linear-gradient(135deg,var(--primary-dark),var(--primary)); color:white; padding:50px 5% 20px; }
+    .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:40px; margin-bottom:40px; }
+    .footer-section h4 { margin-bottom:20px; font-size:1.2rem; }
+    .footer-section a { color:white; text-decoration:none; display:block; margin-bottom:10px; opacity:0.8; transition:opacity 0.3s; }
+    .footer-section a:hover { opacity:1; }
+    .footer-bottom { text-align:center; padding-top:30px; border-top:1px solid rgba(255,255,255,0.1); }
+
+    /* ── Responsive ── */
+    @media (max-width:900px) {
+      .about-layout { grid-template-columns:1fr; }
+    }
+    @media (max-width:768px) {
+      header { flex-direction:column; gap:15px; }
+      nav { flex-wrap:wrap; justify-content:center; gap:15px; }
+      .hero-inner { flex-direction:column; text-align:center; }
+      .hero-photo { width:200px; height:240px; }
+      .hero-text h2 { font-size:2rem; }
+      .section { padding:50px 5%; }
+      .form-grid { grid-template-columns:1fr; }
+      .price-card.featured { transform:scale(1); }
+      .price-card.featured:hover { transform:translateY(-10px); }
     }
   </style>
 </head>
@@ -627,61 +432,87 @@
     <a href="#hjem">Hjem</a>
     <a href="#tjenester">Tjenester</a>
     <a href="#priser">Priser</a>
-    <a href="#forsikring">Forsikring</a>
-    <a href="#bestill">Bestill</a>
+    <a href="#om-oss">Om oss</a>
+    <a href="#bestill">Bestill time</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
 </header>
 
+<!-- ═══════════════════ HERO ═══════════════════ -->
 <section id="hjem" class="hero">
-  <div class="hero-content">
-    <h2>Profesjonell rørlegger – 24/7 hjelp</h2>
-    <p>Rask, pålitelig og sertifisert rørleggertjeneste i hele Oslo-området</p>
-    <a href="#bestill" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Bestill time nå</a>
-    <a href="tel:12345678" class="btn btn-outline"><i class="fas fa-phone"></i> Ring oss: 12345678</a>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h2>Profesjonell rørlegger – 24/7 hjelp</h2>
+      <p>Rask, pålitelig og sertifisert rørleggertjeneste i hele Oslo-området</p>
+      <a href="tel:12345678" class="btn btn-outline"><i class="fas fa-phone"></i> Ring oss: 12345678</a>
+      <a href="#bestill" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Bestill time</a>
+    </div>
+
+   
+      <img class="heroImg" src="rørlegger.png" alt="Rørlegger" style="border-radius: 50%; box-shadow: #0e1924 0 4px 12px;">
+      <div class="photo-placeholder" id="heroPlaceholder">
+        
+        
+      </div>
+     
+    </div>
   </div>
 </section>
 
+<!-- ═══════════════════ TJENESTER ═══════════════════ -->
 <section id="tjenester" class="section">
   <div class="section-header">
     <h2>Våre tjenester</h2>
     <p>Vi tilbyr komplett rørleggertjenester med garanti</p>
   </div>
   <div class="grid">
+
     <div class="service-card animate-on-scroll">
-      <i class="fas fa-bath"></i>
-      <h3>Bad og våtrom</h3>
-      <p>Komplett baderomsrenovering, flislegging og våtromsikring</p>
+      <div class="service-img-wrap">
+        <img src="bad.jpg" alt="">
+        <div class="service-img-placeholder" id="svc2ph">
+      
+        </div>
+      </div>
+      <div class="service-body">
+        <h3>Bad og våtrom</h3>
+        <p>Komplett baderomsrenovering, flislegging og våtromsikring</p>
+      </div>
     </div>
+
     <div class="service-card animate-on-scroll">
-      <i class="fas fa-temperature-high"></i>
-      <h3>Varmepumper</h3>
-      <p>Installasjon og service av varmepumper for optimal oppvarming</p>
+      <div class="service-img-wrap">
+        <img src="varmepumpe2.jpg" alt="">
+        <div class="service-img-placeholder" id="svc2ph">
+      
+        </div>
+       
+      </div>
+      <div class="service-body">
+        <h3>Varmepumper</h3>
+        <p>Installasjon og service av varmepumper for optimal oppvarming</p>
+      </div>
     </div>
-    <div class="service-card animate-on-scroll">
-      <i class="fas fa-tint"></i>
-      <h3>Lekkasjesøk</h3>
-      <p>Avansert utstyr for nøyaktig lekkasjelokalisering</p>
+
+  <div class="service-card animate-on-scroll">
+      <div class="service-img-wrap">
+        <img src="lekasje.png" alt="">
+        <div class="service-img-placeholder" id="svc2ph">
+      
+        </div>
+      </div>
+      <div class="service-body">
+        <h3>Lekkasjesøk</h3>
+        <p>Avansert utstyr for nøyaktig lekkasjelokalisering</p>
+      </div>
     </div>
-    <div class="service-card animate-on-scroll">
-      <i class="fas fa-exchange-alt"></i>
-      <h3>Rørfornying</h3>
-      <p>Moderne metoder for rørutskifting uten graving</p>
-    </div>
-    <div class="service-card animate-on-scroll">
-      <i class="fas fa-toilet"></i>
-      <h3>Toalettinstallasjon</h3>
-      <p>Montering og reparasjon av toaletter og sanitærutstyr</p>
-    </div>
-    <div class="service-card animate-on-scroll">
-      <i class="fas fa-snowplow"></i>
-      <h3>24/7 Vakt</h3>
-      <p>Akutthjelp døgnet rundt, hele året</p>
-    </div>
+
   </div>
 </section>
 
-<section id="priser" class="section" style="background: linear-gradient(135deg, #f8fafc 0%, #eef2f6 100%);">
+<!-- ═══════════════════ PRISER ═══════════════════ -->
+<section id="priser" class="section" style="background:linear-gradient(135deg,#f8fafc 0%,#eef2f6 100%);max-width:100%;">
+  <div style="max-width:1400px;margin:auto;">
   <div class="section-header">
     <h2>Prisinformasjon</h2>
     <p>Gjennomsiktige priser – ingen skjulte kostnader</p>
@@ -707,7 +538,7 @@
         <li><i class="fas fa-check"></i> Inkluderer kjøring</li>
         <li><i class="fas fa-check"></i> Ingen skjulte gebyrer</li>
       </ul>
-      <a href="#bestill" class="btn btn-primary">Ring akutt</a>
+      <a href="#bestill" class="btn btn-primary">Bestill time</a>
     </div>
     <div class="price-card animate-on-scroll">
       <h3>Fastpris oppdrag</h3>
@@ -717,50 +548,13 @@
         <li><i class="fas fa-check"></i> Blandebatteri: kr 1800</li>
         <li><i class="fas fa-check"></i> Sikring av våtrom: fra kr 5000</li>
       </ul>
-      <a href="#bestill" class="btn btn-primary">Be om tilbud</a>
+      <a href="#bestill" class="btn btn-primary">Bestill time</a>
     </div>
+  </div>
   </div>
 </section>
 
-<section id="forsikring" class="section">
-  <div class="section-header">
-    <h2>Forsikringsselskaper vi samarbeider med</h2>
-    <p>Direkte oppgjør med de fleste forsikringsselskaper</p>
-  </div>
-  <div class="grid">
-    <div class="insurance-card animate-on-scroll">
-      <i class="fas fa-shield-alt"></i>
-      <h3>Gjensidige</h3>
-      <p>Direkteoppgjør for alle skadesaker</p>
-    </div>
-    <div class="insurance-card animate-on-scroll">
-      <i class="fas fa-building"></i>
-      <h3>If Skadeforsikring</h3>
-      <p>Godkjent samarbeidspartner</p>
-    </div>
-    <div class="insurance-card animate-on-scroll">
-      <i class="fas fa-handshake"></i>
-      <h3>SpareBank 1 Forsikring</h3>
-      <p>Automatisk skadebehandling</p>
-    </div>
-    <div class="insurance-card animate-on-scroll">
-      <i class="fas fa-chart-line"></i>
-      <h3>Frende Forsikring</h3>
-      <p>Rask og effektiv saksbehandling</p>
-    </div>
-    <div class="insurance-card animate-on-scroll">
-      <i class="fas fa-leaf"></i>
-      <h3>Tryg Forsikring</h3>
-      <p>Godkjent rørlegger i deres nettverk</p>
-    </div>
-    <div class="insurance-card animate-on-scroll">
-      <i class="fas fa-umbrella"></i>
-      <h3>Storebrand</h3>
-      <p>Forhåndsgodkjente priser</p>
-    </div>
-  </div>
-</section>
-
+<!-- ═══════════════════ ANMELDELSER ═══════════════════ -->
 <section id="anmeldelser" class="section">
   <div class="section-header">
     <h2>Hva våre kunder sier</h2>
@@ -768,89 +562,81 @@
   </div>
   <div class="review-slider">
     <div class="review-card animate-on-scroll">
-      <div class="stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-      </div>
+      <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
       <p class="review-text">"Ekstremt rask respons! Fikset lekkasjen på under en time. Profesjonell og hyggelig service. Anbefales på det varmeste!"</p>
-      <div class="reviewer">
-        <i class="fas fa-user-circle"></i>
-        <div>
-          <strong>Kari Nordmann</strong>
-          <small>Oslo</small>
-        </div>
-      </div>
+      <div class="reviewer"><i class="fas fa-user-circle"></i><div><strong>Kari Nordmann</strong><br><small>Oslo</small></div></div>
     </div>
     <div class="review-card animate-on-scroll">
-      <div class="stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-      </div>
+      <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
       <p class="review-text">"Renoverte hele badet vårt. Flott arbeid, god kommunikasjon og holdt tidsplanen. Veldig fornøyd med resultatet!"</p>
-      <div class="reviewer">
-        <i class="fas fa-user-circle"></i>
-        <div>
-          <strong>Per Hansen</strong>
-          <small>Bærum</small>
-        </div>
-      </div>
+      <div class="reviewer"><i class="fas fa-user-circle"></i><div><strong>Per Hansen</strong><br><small>Bærum</small></div></div>
     </div>
     <div class="review-card animate-on-scroll">
-      <div class="stars">
-        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-      </div>
+      <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
       <p class="review-text">"Fant lekkasjen vi ikke fant selv på 2 uker. Rimelig pris og god oppfølging. Kommer til å bruke dem igjen!"</p>
-      <div class="reviewer">
-        <i class="fas fa-user-circle"></i>
-        <div>
-          <strong>Ingrid Olsen</strong>
-          <small>Lørenskog</small>
+      <div class="reviewer"><i class="fas fa-user-circle"></i><div><strong>Ingrid Olsen</strong><br><small>Lørenskog</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ OM OSS ═══════════════════ -->
+<section id="om-oss" class="about-section">
+  <div class="about-inner">
+    <div class="section-header">
+      <h2>Om oss</h2>
+      <p>Bli kjent med teamet bak Rørlegger Nikolai AS</p>
+    </div>
+
+    <div class="about-layout">
+      <!-- Tekst + statistikk -->
+      <div class="about-text">
+        <p>Rørlegger Nikolai AS er en ledende rørleggervirksomhet i Oslo-området med over 10 års erfaring. Vi er stolte av å tilby pålitelige og profesjonelle tjenester til både private og bedrifter.</p>
+        <p>Vårt team av sertifiserte rørleggere er dedikert til å levere høy kvalitet og rask respons, spesielt i akutte situasjoner. Vi bruker kun materialer av høy kvalitet og gir garanti på alt arbeid vi utfører.</p>
+        <p>Vi setter kunden i sentrum og jobber alltid for å finne den beste og mest kostnadseffektive løsningen for deg. Enten det er en liten reparasjon eller en full baderomsrenovering – vi er her for deg.</p>
+
+        <div class="about-stats">
+          <div class="stat-box"><div class="stat-num">10+</div><div class="stat-label">År med erfaring</div></div>
+          <div class="stat-box"><div class="stat-num">500+</div><div class="stat-label">Fornøyde kunder</div></div>
+          <div class="stat-box"><div class="stat-num">24/7</div><div class="stat-label">Akuttberedskap</div></div>
+          <div class="stat-box"><div class="stat-num">100%</div><div class="stat-label">Garanti på arbeid</div></div>
+        </div>
+      </div>
+
+      <!-- Bilde-galleri med placeholders -->
+      <div class="about-images">
+        <div class="about-img-row">
+          <div class="img-placeholder-box tall">
+            <div class="img-placeholder-inner" id="aboutPh1">
+
+            </div>
+           
+          </div>
+          <div class="img-placeholder-box tall">
+            <img id="aboutImg2" src="" alt="">
+            <div class="img-placeholder-inner" id="aboutPh2">
+              
+            </div>
+           
+          </div>
+        </div>
+        <div class="img-placeholder-box wide">
+          <img id="aboutImg3" src="" alt="">
+          <div class="img-placeholder-inner" id="aboutPh3">
+            
+  
+          </div>
+      
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="bestill" class="section">
-  <div class="section-header">
-    <h2>Bestill time</h2>
-    <p>Fyll ut skjemaet så kontakter vi deg innen 30 minutter</p>
-  </div>
-  <div class="form-container">
-    <form id="bookingForm">
-      <div class="form-group">
-        <input type="text" placeholder="Fullt navn" required>
-      </div>
-      <div class="form-group">
-        <input type="tel" placeholder="Telefonnummer" required>
-      </div>
-      <div class="form-group">
-        <input type="email" placeholder="E-postadresse">
-      </div>
-      <div class="form-group">
-        <input type="text" placeholder="Adresse">
-      </div>
-      <div class="form-group">
-        <select required>
-          <option value="">Velg type oppdrag</option>
-          <option>Lekkasje / akutt</option>
-          <option>Bad og våtrom</option>
-          <option>Varmepumpe</option>
-          <option>Rørfornying</option>
-          <option>Toalett / sanitær</option>
-          <option>Annet</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <textarea rows="4" placeholder="Beskriv oppdraget ditt"></textarea>
-      </div>
-      <button type="submit"><i class="fas fa-paper-plane"></i> Send forespørsel</button>
-    </form>
-  </div>
-</section>
-
+<!-- ═══════════════════ KONTAKT ═══════════════════ -->
 <section id="kontakt" class="section">
   <div class="section-header">
     <h2>Kontakt oss</h2>
-    <p>Vi er her for å hjelpe deg - ring eller besøk oss</p>
+    <p>Vi er her for å hjelpe deg</p>
   </div>
   <div class="contact-grid">
     <div class="contact-info-card animate-on-scroll">
@@ -861,49 +647,108 @@
     <div class="contact-info-card animate-on-scroll">
       <i class="fas fa-phone"></i>
       <h3>Telefon</h3>
-      <p><a href="tel:12345678" style="color: var(--primary);">12345678</a><br>24/7 akutt</p>
-    </div>
-    <div class="contact-info-card animate-on-scroll">
-      <i class="fas fa-envelope"></i>
-      <h3>E-post</h3>
-      <p>post@rorlegger-nikolai.no<br>Vi svarer innen 1 time</p>
+      <p><a href="tel:12345678" style="color:var(--primary);">12345678</a><br>24/7 akutt</p>
     </div>
     <div class="contact-info-card animate-on-scroll">
       <i class="fas fa-clock"></i>
       <h3>Åpningstider</h3>
-      <p>Man-Fre: 08:00 - 20:00<br>Lør-Søn: Akuttberedskap</p>
+      <p>Man-Fre: 08:00 – 20:00<br>Lør-Søn: Akuttberedskap</p>
     </div>
   </div>
-  
-  <div class="map-container animate-on-scroll">
-    <iframe 
-      src="https://www.openstreetmap.org/export/embed.html?bbox=10.735%2C59.913%2C10.745%2C59.923&layer=mapnik&marker=59.918%2C10.740" 
-      allowfullscreen="" 
-      loading="lazy">
-    </iframe>
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1999.9090623377755!2d10.743849116095944!3d59.9138686818763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46416e61b5c46d37%3A0x867332e987c2f6d2!2sOslo%20S!5e0!3m2!1sno!2sno!4v1680000000000!5m2!1sno!2sno" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Kart"></iframe>
   </div>
 </section>
 
+<!-- ═══════════════════ BESTILL TIME (Formspree) ═══════════════════ -->
+<section id="bestill" class="section booking-section" style="max-width:100%;background:linear-gradient(135deg,#f0f7ff,#e4f0fb);">
+  <div style="max-width:1400px;margin:auto;">
+  <div class="section-header">
+    <h2>Bestill rørleggertime</h2>
+    <p>Fyll ut skjemaet, så tar vi kontakt innen kort tid</p>
+  </div>
+
+  <div class="form-container animate-on-scroll">
+
+    <!
+    
+
+    <!--
+      ════════════════════════════════════════════
+      BYTT UT "DIN_FORMSPREE_ID" med din Formspree-ID
+      Eksempel: action="https://formspree.io/f/xpwzabcd"
+      ════════════════════════════════════════════
+    -->
+    <form action="https://formspree.io/f/DIN_FORMSPREE_ID" method="POST" id="bookingForm">
+
+      <!-- Skjult felt – hjelper Formspree å kategorisere meldingen -->
+      <input type="hidden" name="_subject" value="Ny bestilling – Rørlegger Nikolai AS">
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="navn">Fullt navn *</label>
+          <input type="text" id="navn" name="navn" placeholder="Ola Nordmann" required>
+        </div>
+        <div class="form-group">
+          <label for="telefon">Telefonnummer *</label>
+          <input type="tel" id="telefon" name="telefon" placeholder="123 45 678" required>
+        </div>
+        <div class="form-group">
+          <label for="epost">E-post *</label>
+          <input type="email" id="epost" name="email" placeholder="ola@eksempel.no" required>
+        </div>
+        <div class="form-group">
+          <label for="adresse">Adresse / sted</label>
+          <input type="text" id="adresse" name="adresse" placeholder="Storgata 1, Oslo">
+        </div>
+        <div class="form-group">
+          <label for="tjeneste">Type tjeneste</label>
+          <select id="tjeneste" name="tjeneste">
+            <option value="">– Velg tjeneste –</option>
+            <option>Bad og våtrom</option>
+            <option>Varmepumpe</option>
+            <option>Lekkasjesøk</option>
+            <option>Akutt / rørbrudd</option>
+            <option>Toalettbytte</option>
+            <option>Blandebatteri</option>
+            <option>Annet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="dato">Ønsket dato</label>
+          <input type="date" id="dato" name="dato">
+        </div>
+        <div class="form-group full">
+          <label for="melding">Beskriv problemet *</label>
+          <textarea id="melding" name="melding" placeholder="Beskriv hva som er galt eller hva du trenger hjelp til..." required></textarea>
+        </div>
+        <!-- Honeypot-felt mot spam (skjult for brukere) -->
+        <input type="text" name="_gotcha" style="display:none">
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <i class="fas fa-paper-plane"></i> Send bestilling
+      </button>
+    </form>
+  </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
 <footer>
   <div class="footer-grid">
     <div class="footer-section">
       <h4><i class="fas fa-wrench"></i> Rørlegger Nikolai AS</h4>
-      <p>Vi er en sertifisert rørleggervirksomhet med over 10 års erfaring i Oslo-området. Kvalitet, pålitelighet og raske responser er våre kjernverdier.</p>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      </div>
+      <p>Sertifisert rørleggervirksomhet med over 10 års erfaring i Oslo-området. Kvalitet, pålitelighet og raske responser er våre kjerneverdier.</p>
     </div>
     <div class="footer-section">
       <h4>Rask kontakt</h4>
       <a href="tel:12345678"><i class="fas fa-phone"></i> 12345678</a>
       <a href="mailto:post@rorlegger-nikolai.no"><i class="fas fa-envelope"></i> post@rorlegger-nikolai.no</a>
-      <a href="#"><i class="fas fa-comments"></i> Chat med oss</a>
     </div>
     <div class="footer-section">
       <h4>Åpningstider</h4>
-      <p>Mandag - Fredag: 08:00 - 20:00</p>
+      <p>Mandag – Fredag: 08:00 – 20:00</p>
       <p>Lørdag: Akuttberedskap</p>
       <p>Søndag: Akuttberedskap</p>
       <p><strong>24/7 akutt-telefon: 12345678</strong></p>
@@ -915,55 +760,35 @@
 </footer>
 
 <script>
-  // Scroll animasjoner
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
+  /* ── Scroll-animasjoner ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.animate-on-scroll').forEach(el => {
-    observer.observe(el);
-  });
-
-  // Smooth scrolling for alle interne lenker
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+  /* ── Smooth scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 
-  // Form submit handling
-  document.getElementById('bookingForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Takk for henvendelsen! Vi kontakter deg innen kort tid.');
-    this.reset();
+  /* ── Sticky header ── */
+  window.addEventListener('scroll', () => {
+    const h = document.querySelector('header');
+    h.style.padding = window.scrollY > 100 ? '10px 5%' : '15px 5%';
+    h.style.background = window.scrollY > 100 ? 'rgba(10,61,98,0.98)' : 'rgba(10,61,98,0.95)';
   });
 
-  // Sticky header effect
-  window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-      header.style.background = 'rgba(10, 61, 98, 0.98)';
-      header.style.padding = '10px 5%';
-    } else {
-      header.style.background = 'rgba(10, 61, 98, 0.95)';
-      header.style.padding = '15px 5%';
-    }
+
+
+
+  /* ── Booking form – valgfri lokal fallback (brukes ikke når Formspree er aktiv) ── */
+  document.getElementById('bookingForm').addEventListener('submit', function() {
+    // Formspree håndterer innsending – siden redirigeres automatisk.
+    // Fjern denne event listeneren hvis du vil ha Formspree sin standardoppførsel.
   });
 </script>
 
