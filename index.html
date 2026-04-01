@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Frilans webutvikler og designer som bygger moderne, raske og universelt utformede nettsider.">
-    <title>Emma Strand | Webdesign & Utvikling</title>
+    <title> Webdesign & Utvikling</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -382,9 +382,6 @@
             transition: left 0.6s ease;
         }
 
-        .card:hover .card-image::before {
-            left: 100%;
-        }
 
         .card-content {
             padding: 1.8rem;
@@ -480,10 +477,7 @@
             transition: all 0.3s ease;
         }
 
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
+      
 
         .service-card i {
             font-size: 3rem;
@@ -686,10 +680,7 @@
             transition: all 0.3s ease;
         }
 
-        .image-wrapper:hover {
-            transform: scale(1.02);
-        }
-
+       
         .image-wrapper i {
             font-size: 6rem;
             color: var(--text-dark);
@@ -870,20 +861,23 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Utvalgte prosjekter</h2>
-                    <p>Eksempler på hva jeg kan lage.</p>
+                    <p>Eksempler på hva jeg kan lage. Merk at dette bare er maler og ikke refleksjon av faktiske kunder.</p>
                 </div>
                 <div class="grid">
                     <article class="card animate-on-scroll">
                         <div class="card-image">
-                            <i class="fas fa-glass-cheers"></i>
+                        <img src="images/tatovering.png" height="105%" alt="Tatoveringsstudio eksempel">    
                         </div>
                         <div class="card-content">
-                            <h3>Tattoveringsstudio</h3>
-        
+                            
+                            <h3>Tatoveringsstudio</h3>
+                            
                             <div class="tech-stack">
                                 <span>HTML5</span>
                                 <span>CSS3</span>
                                 <span>JavaScript</span>
+                                
+
                             </div>
                             <div class="btn-wrapper">
                                 <span class="funky-btn"><a href="#kontakt"></a></span>
@@ -893,10 +887,12 @@
 
                     <article class="card animate-on-scroll">
                         <div class="card-image">
-                            <i class="fas fa-utensils"></i>
+                            <img src="images/restaurant.png" height="100%" alt="Restaurant nettside eksempel">
+                            
                         </div>
                         <div class="card-content">
                             <h3>Kafé</h3>
+                            
         
                             <div class="tech-stack">
                                 <span>HTML5</span>
@@ -911,10 +907,10 @@
 
                     <article class="card animate-on-scroll">
                         <div class="card-image">
-                            <i class="fas fa-store"></i>
+                            <img src="images/elektriker2.png" height="100%" alt="Elektrikerfirma eksempel">   
                         </div>
                         <div class="card-content">
-                            <h3>Rørleggerfirma</h3>
+                            <h3>Elektrikerfirma</h3>
                         
                             <div class="tech-stack">
                                 <span>HTML5</span>
@@ -922,7 +918,7 @@
                                 <span>JavaScript</span>
                             </div>
                             <div class="btn-wrapper">
-                                <span class="funky-btn"><a href="rorlegger.html"></a></span>
+                                <span class="funky-btn"><a href="elektrikerbedrift.html"></a></span>
                             </div>
                         </div>
                     </article>
@@ -945,7 +941,7 @@
                     
                     <div class="service-card animate-on-scroll">
                         <i class="fas fa-chart-line"></i>
-                        <h3>SEO Optimalisering</h3>
+                        <h3>SEO-Optimalisering</h3>
                         <p>Teknisk SEO og innholdsoptimalisering som sikrer at kundene finner deg organisk på Google.</p>
                     </div>
                     
@@ -967,13 +963,13 @@
                 <div class="process-steps">
                     <div class="step animate-on-scroll">
                         <div class="step-number">1</div>
-                        <h3>Gratis konsultasjon</h3>
-                        <p>Vi tar en uforpliktende prat om dine mål og behov for nettsiden.</p>
+                        <h3>Gratis demo</h3>
+                        <p>Har du lyst til å se hvordan jeg kan hjelpe deg med din nettside? Da kan jeg lage en gratis demo!</p>
                     </div>
                     <div class="step animate-on-scroll">
                         <div class="step-number">2</div>
                         <h3>Kartlegging</h3>
-                        <p>Vi går i dybden på funksjonalitet, design og tekniske krav.</p>
+                        <p>Vi blir enige om funksjonalitet, design og tekniske krav.</p>
                     </div>
                     <div class="step animate-on-scroll">
                         <div class="step-number">3</div>
@@ -983,11 +979,11 @@
                     <div class="step animate-on-scroll">
                         <div class="step-number">4</div>
                         <h3>Lansering</h3>
-                        <p>Grundig testing, optimalisering og endelig publisering av din nettside.</p>
+                        <p>Jeg fikser hosting, domene og sikkerhet for din nettside.</p>
                     </div>
                 </div>
                 <div style="text-align: center;">
-                    <p>Har du flere spørsmål? <a href="#faq" style="font-weight: bold; color: var(--primary-accent);">Sjekk ofte stilte spørsmål</a> eller <a href="#kontakt" style="font-weight: bold; color: var(--primary-accent);">kontakt meg her</a>.</p>
+                    <p>Har du flere spørsmål? <a href="#faq" style="font-weight: bold; color: var(--primary-accent);">Sjekk ofte stilte spørsmål</a>
                 </div>
             </div>
         </section>
@@ -1001,15 +997,15 @@
                         </div>
                     </div>
                     <div class="about-content animate-on-scroll">
-                        <h2>Hei, jeg er [navn]</h2>
+                        <h2>Hei!</h2>
                         <p style="margin-bottom: 1rem;">Jeg brenner for å hjelpe bedrifter med å finne kunder i den digitale verden. Med et øye for design og kode bygger jeg nettsider som ikke bare ser bra ut, men som også fungerer optimalt.</p>
-                        <p style="margin-bottom: 1rem;">Med over 6 års erfaring innen webutvikling har jeg hjulpet over 50 bedrifter med å etablere en sterk digital tilstedeværelse. Jeg kombinerer teknisk ekspertise med kreativ design for å skape løsninger som virkelig skiller seg ut.</p>
-                        <p>Enten du trenger en helt ny nettside eller en oppgradering av den du har, står jeg klar til å hjelpe deg med å løfte din digitale tilstedeværelse til neste nivå.</p>
+                        
                         <div class="tech-stack" style="margin-top: 1.5rem;">
                             <span>Javascript</span>
                             <span>CSS</span>
                             <span>Python</span>
                             <span>HTML</span>
+                            <span>Formspree</span>
                             
                         </div>
                     </div>
@@ -1017,93 +1013,21 @@
             </div>
         </section>
 
-      <section id="faq">
-    <div class="container">
-        <div class="section-header">
-            <h2>Ofte stilte spørsmål</h2>
-            <p>Her finner du svar på de vanligste spørsmålene</p>
-        </div>
-        
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>Hva koster en nettside?</h3>
-                    <div class="faq-icon-wrapper">
-                        <i class="fas fa-plus"></i>
-                        <i class="fas fa-minus"></i>
-                    </div>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        <p>Prisen varierer basert på kompleksitet og funksjonalitet. En enkel informasjonsside starter fra 8 000,- kr, mens mer avanserte løsninger med e-handel eller integrasjoner prises individuelt. Kontakt meg for et uforpliktende tilbud skreddersydd dine behov.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>Hvor lang tid tar det å bygge en nettside?</h3>
-                    <div class="faq-icon-wrapper">
-                        <i class="fas fa-plus"></i>
-                        <i class="fas fa-minus"></i>
-                    </div>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        <p>Tidsrammen avhenger av prosjektets omfang. En standard bedriftsside tar normalt 2-3 uker fra oppstart til lansering. Større prosjekter med e-handel eller spesialtilpassede funksjoner kan ta 4-6 uker. Jeg holder alltid tidsplanen vi avtaler.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>Eier jeg nettsiden selv?</h3>
-                    <div class="faq-icon-wrapper">
-                        <i class="fas fa-plus"></i>
-                        <i class="fas fa-minus"></i>
-                    </div>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        <p>Ja, 100%! Etter at prosjektet er fullført og betalt, overføres alt eierskap til deg og din bedrift. Du får full tilgang til all kode, og det er ingen bindinger til meg som utvikler. Nettsiden er din å gjøre hva du vil med.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>Tilbyr du vedlikehold etter lansering?</h3>
-                    <div class="faq-icon-wrapper">
-                        <i class="fas fa-plus"></i>
-                        <i class="fas fa-minus"></i>
-                    </div>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">
-                        <p>Absolutt! Jeg tilbyr fleksible vedlikeholdsavtaler som inkluderer sikkerhetsoppdateringer, backup, mindre endringer og teknisk support. Du kan også velge å administrere nettsiden selv - jeg gir alltid grundig opplæring.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>    
 </main>
 
     <footer>
         <div class="container footer-content">
-            <h3 style="color: white; margin-bottom: 1rem;">Navn</h3>
+            <h3 style="color: white; margin-bottom: 1rem;">Nikolai</h3>
             <p>Webdesigner & Utvikler</p>
             <div class="social-links">
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-x-twitter"></i></a>
+                
+                
             </div>
             <p>
-                <a href="mailto:hei@navn.no" style="color: var(--secondary-accent);">hei@navn.no</a> | 
-                <a href="tel:12345678" style="color: var(--secondary-accent);">+47 123 45 678</a>
+                <a href="mailto:nikolai.and.askedal@gmail.com" style="color: var(--secondary-accent);">nikolai.and.askedal@gmail.com</a> | 
+                <a href="tel:45088623" style="color: var(--secondary-accent);">+47 450 88 623</a>
             </p>
-            <p style="margin-top: 2rem; font-size: 0.9rem;">&copy; 2026 Navn. Alle rettigheter reservert.</p>
+            <p style="margin-top: 2rem; font-size: 0.9rem;">&copy; 2026. Alle rettigheter reservert.</p>
             <p style="margin-top: 0.5rem; font-size: 0.8rem;">
         </div>
     </footer>
