@@ -1,174 +1,139 @@
-
 <!DOCTYPE html>
 <html lang="no">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Frilans webutvikler og designer som bygger moderne, raske og universelt utformede nettsider.">
-    <title> Webdesign & Utvikling</title>
+    <title>Askeladden Webdesign</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
-
-        /* Fargepalett og variabler */
         :root {
-            --bg-color: #F6F6F2;
-            --text-dark: #2C5F6E;
-            --primary-accent: #6FB3B8;
-            --secondary-accent: #C2EDCE;
-            --white: #ffffff;
-            --dark-bg: #1A3B44;
-            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --bg-color: #F4F2EC;
+            --bg-warm: #EDEAE0;
+            --text-dark: #1E3A44;
+            --text-mid: #3A6070;
+            --primary-accent: #4A9EAA;
+            --secondary-accent: #B8E4C2;
+            --highlight: #E8F4D4;
+            --white: #FAFAF7;
+            --dark-bg: #152830;
+            --darker-bg: #0D1F26;
+            --mono-green: #5BBF8A;
+            --mono-comment: #7FA8B0;
+            --border-subtle: rgba(74, 158, 170, 0.18);
+            --shadow-sm: 0 2px 8px rgba(30, 58, 68, 0.06);
+            --shadow-md: 0 8px 28px rgba(30, 58, 68, 0.10);
+            --shadow-lg: 0 20px 50px rgba(30, 58, 68, 0.14);
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-body: 'DM Sans', sans-serif;
         }
 
-        /* Grunnleggende reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-body);
             background-color: var(--bg-color);
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Animasjoner */
+        /* Dot grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(74,158,170,0.13) 1px, transparent 1px);
+            background-size: 28px 28px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Animations */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(111, 179, 184, 0.3); }
-            50% { box-shadow: 0 0 20px rgba(111, 179, 184, 0.6); }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 0 rgba(74,158,170,0); }
+            50% { box-shadow: 0 0 18px rgba(74,158,170,0.25); }
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+        .animate-on-scroll { opacity: 0; }
+        .animate-on-scroll.visible { animation: fadeInUp 0.7s ease forwards; }
 
-        .animate-on-scroll {
-            opacity: 0;
-        }
-
-        .animate-on-scroll.visible {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-
-        h1, h2, h3 {
-            margin-bottom: 1rem;
-            font-weight: 700;
-            line-height: 1.2;
-        }
+        h1, h2, h3 { line-height: 1.2; }
 
         h2 {
-            font-size: 2.5rem;
+            font-family: var(--font-mono);
+            font-size: 2.2rem;
+            font-weight: 700;
             position: relative;
             display: inline-block;
         }
 
-        h2::after {
-            content: '';
+        h2::before {
+            content: '//';
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            color: var(--mono-green);
             position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-accent), var(--text-dark));
-            border-radius: 2px;
+            left: -2.4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 400;
+            opacity: 0.85;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
         }
 
-        .section-header h2::after {
-            left: 50%;
-            transform: translateX(-50%);
+        .section-header h2::before {
+            left: -2.4rem;
         }
 
-        a {
-            text-decoration: none;
-            color: var(--text-dark);
-            transition: all 0.3s ease;
+        .section-header p {
+            margin-top: 1.2rem;
+            color: var(--text-mid);
+            font-size: 1.05rem;
         }
 
-        /* Layout-klasser */
+        a { text-decoration: none; color: var(--text-dark); transition: all 0.3s ease; }
+
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 5rem 0;
+            padding: 5.5rem 0;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Header & Navigasjon */
+        /* ── HEADER ── */
         header {
-            background: rgba(246, 246, 242, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(244, 242, 236, 0.93);
+            backdrop-filter: blur(14px);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--border-subtle);
             transition: all 0.3s ease;
         }
 
@@ -176,29 +141,38 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
+            padding: 0.95rem 5%;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--text-dark), var(--primary-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
+            font-family: var(--font-mono);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.1rem;
+            letter-spacing: -0.5px;
         }
 
-        .logo::before {
-            content: '<>';
-            position: absolute;
-            font-size: 0.8rem;
-            top: -15px;
-            right: -25px;
-            opacity: 0.6;
+        .logo .bracket {
+            color: var(--primary-accent);
             font-weight: 400;
+            font-size: 1.5rem;
+        }
+
+        .logo .name { color: var(--text-dark); }
+
+        .logo .cursor-blink {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background: var(--primary-accent);
+            margin-left: 2px;
+            vertical-align: middle;
+            animation: blink 1.1s step-end infinite;
         }
 
         .nav-links {
@@ -208,128 +182,276 @@
         }
 
         .nav-links a {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
             font-weight: 500;
+            color: var(--text-mid);
+            letter-spacing: 0.3px;
             position: relative;
+            padding-bottom: 2px;
+        }
+
+        .nav-links a .nav-num {
+            color: var(--mono-green);
+            font-size: 0.7rem;
+            margin-right: 3px;
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -4px;
             left: 0;
             width: 0;
-            height: 2px;
+            height: 1.5px;
             background: var(--primary-accent);
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+        .nav-links a:hover { color: var(--text-dark); }
+        .nav-links a:hover::after { width: 100%; }
 
- 
-
-        /* Hero Section */
+        /* ── HERO ── */
         #hero {
-            text-align: center;
-            padding: 6rem 1rem;
-            background: linear-gradient(135deg, var(--secondary-accent) 0%, var(--bg-color) 100%);
+            padding: 7rem 1rem 6rem;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(160deg, var(--highlight) 0%, var(--bg-color) 60%);
+            z-index: 1;
         }
 
         #hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(111,179,184,0.1) 0%, transparent 70%);
+            top: -60px; right: -80px;
+            width: 520px; height: 520px;
+            background: radial-gradient(circle, rgba(74,158,170,0.10) 0%, transparent 70%);
             border-radius: 50%;
-            animation: float 20s ease-in-out infinite;
+            animation: float 18s ease-in-out infinite;
         }
 
-        #hero::after {
-            content: '';
+        /* ── HERO TERMINAL CLUSTER ── */
+        .hero-terminals {
             position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(194,237,206,0.2) 0%, transparent 70%);
+            top: 0; right: 0;
+            width: 48%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .hero-terminal {
+            position: absolute;
+            background: var(--darker-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            border: 1px solid rgba(255,255,255,0.07);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Main large terminal */
+        .hero-terminal.t-main {
+            width: 340px;
+            top: 3rem; right: 4%;
+            opacity: 0.95;
+            animation: float 14s ease-in-out infinite reverse;
+        }
+
+        /* Smaller teal-tinted terminal */
+        .hero-terminal.t-small {
+            width: 220px;
+            top: 1rem; right: 46%;
+            opacity: 0.75;
+            background: #0A2535;
+            border-color: rgba(74,158,170,0.2);
+            animation: float 18s ease-in-out infinite;
+            font-size: 0.65rem;
+        }
+
+        /* Bottom accent terminal */
+        .hero-terminal.t-bottom {
+            width: 260px;
+            bottom: 2rem; right: 8%;
+            opacity: 0.65;
+            background: #0F1E28;
+            border-color: rgba(91,191,138,0.15);
+            animation: float 22s ease-in-out infinite reverse;
+            font-size: 0.65rem;
+        }
+
+        .terminal-bar {
+            background: #1E3540;
+            padding: 0.55rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .t-dot {
+            width: 10px; height: 10px;
             border-radius: 50%;
-            animation: float 15s ease-in-out infinite reverse;
+        }
+        .t-dot.red { background: #FF6058; }
+        .t-dot.yellow { background: #FFBD2E; }
+        .t-dot.green { background: #28CA42; }
+
+        .terminal-body {
+            padding: 1rem 1.1rem 1.2rem;
+            line-height: 1.75;
+        }
+
+        /* ── ILLUSTRATION TERMINALS ── */
+        .project-illustration {
+            position: relative;
+            height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .illus-terminal {
+            position: absolute;
+            background: var(--darker-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            border: 1px solid rgba(255,255,255,0.07);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .illus-terminal.il-main {
+            width: 280px;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+
+        .illus-terminal.il-back-left {
+            width: 220px;
+            top: 50%; left: 50%;
+            transform: translate(-65%, -60%) rotate(-6deg);
+            opacity: 0.6;
+            background: #0A2535;
+            border-color: rgba(74,158,170,0.2);
+            z-index: 2;
+        }
+
+        .illus-terminal.il-back-right {
+            width: 200px;
+            top: 50%; left: 50%;
+            transform: translate(-30%, -40%) rotate(5deg);
+            opacity: 0.45;
+            background: #0F1E10;
+            border-color: rgba(91,191,138,0.15);
+            z-index: 1;
+        }
+
+        @media (max-width: 860px) {
+            .project-illustration { height: 240px; }
+            .illus-terminal.il-main { width: 200px; font-size: 0.6rem; }
+            .illus-terminal.il-back-left { width: 160px; }
+            .illus-terminal.il-back-right { width: 150px; }
+        }
+
+        .t-comment { color: #4E7A8A; }
+        .t-green { color: var(--mono-green); }
+        .t-teal { color: var(--primary-accent); }
+        .t-white { color: #D4E8EC; }
+        .t-yellow { color: #E8CC74; }
+        .t-blink {
+            display: inline-block;
+            width: 7px; height: 0.9em;
+            background: var(--mono-green);
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
-            animation: fadeInUp 1s ease;
-        }
-
-        #hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-dark), var(--primary-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        #hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 2rem auto;
-            color: var(--text-dark);
+            z-index: 2;
+            animation: fadeInUp 0.9s ease;
+            max-width: 640px;
         }
 
         .hero-badge {
-            display: inline-block;
-            background: rgba(111, 179, 184, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            backdrop-filter: blur(5px);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--white);
+            border: 1px solid var(--border-subtle);
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            margin-bottom: 1.8rem;
+            color: var(--text-mid);
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Knapper */
+        .hero-badge i { color: var(--primary-accent); }
+        .hero-badge .prompt { color: var(--mono-green); margin-right: 2px; }
+
+        #hero h1 {
+            font-family: var(--font-mono);
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1.2rem;
+            line-height: 1.15;
+        }
+
+        #hero h1 .accent { color: var(--primary-accent); }
+
+        #hero p {
+            font-size: 1.15rem;
+            color: var(--text-mid);
+            max-width: 520px;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        /* ── BUTTONS ── */
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 1rem 2rem;
-            border-radius: 50px;
+            padding: 0.9rem 1.8rem;
+            border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
             cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--text-dark), var(--primary-accent));
+            background: var(--text-dark);
             color: white;
             border: none;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
+            background: var(--primary-accent);
+            transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
 
         .btn-outline {
             background: transparent;
-            border: 2px solid var(--text-dark);
+            border: 1.5px solid var(--text-dark);
             color: var(--text-dark);
         }
 
         .btn-outline:hover {
             background: var(--text-dark);
             color: white;
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
-        /* Grid for Portefølje og Tjenester */
+        /* ── GRID ── */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -337,23 +459,71 @@
             margin-top: 2rem;
         }
 
+        /* ── TRIPP-TRAPP LAYOUT ── */
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+            margin-top: 2rem;
+        }
+
+        .project-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .project-row.reverse {
+            direction: rtl;
+        }
+        .project-row.reverse > * {
+            direction: ltr;
+        }
+
+        /* ── PROJECT CARDS ── */
         .card {
             background-color: var(--white);
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-subtle);
             transition: all 0.4s ease;
             position: relative;
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-6px);
             box-shadow: var(--shadow-lg);
+            border-color: rgba(74,158,170,0.35);
         }
 
+        /* Terminal top bar on cards */
+        .card-terminal-bar {
+            background: var(--darker-bg);
+            padding: 0.55rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .card-terminal-bar .t-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+        }
+
+        .card-terminal-bar .filename {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--mono-comment);
+            margin-left: 0.5rem;
+        }
+
+        .card-terminal-bar .filename .ext { color: var(--primary-accent); }
+
         .card-image {
-            height: 240px;
-            background: linear-gradient(135deg, var(--secondary-accent), var(--primary-accent));
+            height: 260px;
+            background: linear-gradient(135deg, var(--highlight), var(--secondary-accent));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -361,69 +531,66 @@
             overflow: hidden;
         }
 
-        .card-image i {
-            font-size: 4rem;
-            color: var(--text-dark);
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover .card-image i {
-            transform: scale(1.1);
-        }
-
-        .card-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+        .card-image img {
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s ease;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
+        .card:hover .card-image img { transform: scale(1.04); }
 
         .card-content {
-            padding: 1.8rem;
+            padding: 1.6rem;
+        }
+
+        /* // comment label */
+        .card-comment {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--mono-comment);
+            margin-bottom: 0.3rem;
         }
 
         .card-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
         }
 
         .tech-stack {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
             flex-wrap: wrap;
-            margin: 1rem 0;
+            margin: 0.8rem 0 1rem;
         }
 
         .tech-stack span {
-            background: var(--secondary-accent);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            background: var(--bg-color);
+            border: 1px solid var(--border-subtle);
+            padding: 0.2rem 0.65rem;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-family: var(--font-mono);
+            color: var(--text-mid);
         }
 
-        /* Funky 3D Knapper */
-        .btn-wrapper {
-            margin-top: 1.5rem;
-            text-align: center;
-        }
+        /* Funky 3D Button */
+        .btn-wrapper { margin-top: 1.2rem; text-align: left; }
 
         .funky-btn {
             position: relative;
             display: inline-flex;
             width: 140px;
-            height: 45px;
-            margin: 0 auto;
+            height: 42px;
             perspective: 700px;
         }
 
         .funky-btn a {
-            font-size: 0.9rem;
-            letter-spacing: 0.7px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
             transform-style: preserve-3d;
             transform: translateZ(-17.5px);
             transition: transform 0.25s;
@@ -433,23 +600,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
         }
 
         .funky-btn a:before,
         .funky-btn a:after {
             position: absolute;
             content: "Se prosjekt";
-            height: 45px;
-            width: 140px;
+            height: 42px; width: 140px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid var(--text-dark);
+            border: 1.5px solid var(--text-dark);
             box-sizing: border-box;
-            border-radius: 8px;
-            top: 0;
-            left: 0;
+            border-radius: 6px;
+            top: 0; left: 0;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
         }
 
         .funky-btn a:before {
@@ -460,243 +626,178 @@
 
         .funky-btn a:after {
             color: var(--text-dark);
-            background: var(--bg-color);
+            background: var(--text-dark);
             transform: rotateX(90deg) translateZ(17.5px);
         }
 
-        .funky-btn a:hover {
-            transform: translateZ(-17.5px) rotateX(-90deg);
+        .funky-btn a:hover { transform: translateZ(-10.5px) rotateX(-10deg)}
+
+        /* Responsive tripp-trapp */
+        @media (max-width: 860px) {
+            .project-row {
+                grid-template-columns: 1fr;
+            }
+            .project-row.reverse {
+                direction: ltr;
+            }
+            .project-illustration {
+                height: 220px;
+                font-size: 3.5rem;
+            }
         }
 
-        /* Tjenester kort */
+        /* ── SERVICES ── */
+        #tjenester { background-color: var(--white); position: relative; }
+
+        #tjenester::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(74,158,170,0.07) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
         .service-card {
             text-align: center;
-            padding: 2rem;
-            background: var(--white);
-            border-radius: 20px;
+            padding: 2.2rem 1.8rem;
+            background: var(--bg-color);
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
 
-      
+        .service-card::before {
+            content: attr(data-label);
+            position: absolute;
+            top: 1rem; right: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--border-subtle);
+            color: rgba(74,158,170,0.35);
+            letter-spacing: 1px;
+        }
+
+   
 
         .service-card i {
-            font-size: 3rem;
+            font-size: 2.4rem;
             color: var(--primary-accent);
             margin-bottom: 1rem;
+            display: block;
         }
 
-        /* Prosess steg */
+        .service-card h3 {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .service-card p { font-size: 0.95rem; color: var(--text-mid); }
+
+        /* ── PROCESS ── */
         .process-steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
+            counter-reset: step-counter;
         }
 
         .step {
             text-align: center;
             position: relative;
+            padding: 2rem 1.5rem;
+            background: var(--white);
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(74,158,170,0.35);
+        }
+
+        /* Connector line between steps */
+        .step:not(:last-child)::after {
+            content: '···>';
+            position: absolute;
+            right: -1.5rem;
+            top: 2.2rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--primary-accent);
+            opacity: 0.5;
+            z-index: 2;
         }
 
         .step-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--text-dark), var(--primary-accent));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 0 auto 1rem;
-            transition: transform 0.3s ease;
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+            line-height: 1;
+            position: relative;
+            display: inline-block;
         }
 
-        .step:hover .step-number {
-            transform: scale(1.1);
+        .step-number::before {
+            content: 'step_';
+            font-size: 0.65rem;
+            color: var(--mono-green);
+            font-weight: 400;
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            top: -1rem;
         }
 
-        
-/* FAQ Section - Enkel og fungerende versjon */
-/* FAQ Section - Forbedret versjon med jevn animasjon */
-.faq-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
+        .step h3 {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
 
-.faq-item {
-    background: var(--white);
-    margin-bottom: 1rem;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(111, 179, 184, 0.15);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+        .step p { font-size: 0.9rem; color: var(--text-mid); }
 
-.faq-item:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    border-color: rgba(111, 179, 184, 0.3);
-}
-
-.faq-question {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 1.5rem;
-    cursor: pointer;
-    background: var(--white);
-    transition: all 0.3s ease;
-    gap: 1rem;
-}
-
-.faq-question:hover {
-    background: linear-gradient(90deg, rgba(111, 179, 184, 0.03) 0%, transparent 100%);
-}
-
-.faq-question h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    transition: color 0.3s ease;
-    flex: 1;
-}
-
-.faq-item.active .faq-question h3 {
-    color: var(--primary-accent);
-}
-
-/* Ikon-styling med Font Awesome */
-.faq-icon-wrapper {
-    position: relative;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.faq-icon-wrapper i {
-    position: absolute;
-    font-size: 1rem;
-    color: var(--primary-accent);
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.faq-icon-wrapper .fa-plus {
-    opacity: 1;
-    transform: rotate(0deg);
-}
-
-.faq-icon-wrapper .fa-minus {
-    opacity: 0;
-    transform: rotate(-90deg);
-}
-
-.faq-item.active .faq-icon-wrapper .fa-plus {
-    opacity: 0;
-    transform: rotate(90deg);
-}
-
-.faq-item.active .faq-icon-wrapper .fa-minus {
-    opacity: 1;
-    transform: rotate(0deg);
-}
-
-/* Answer container - smooth animasjon */
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    background: var(--white);
-}
-
-.faq-item.active .faq-answer {
-    max-height: 300px;
-}
-
-.faq-answer-inner {
-    padding: 0 1.5rem 1.25rem 1.5rem;
-    border-top: 1px solid rgba(111, 179, 184, 0.15);
-}
-
-.faq-answer-inner p {
-    margin: 0;
-    padding-top: 1rem;
-    line-height: 1.7;
-    color: var(--text-dark);
-    opacity: 0.9;
-}
-
-/* Mikro-interaksjoner */
-.faq-question:active {
-    transform: scale(0.99);
-}
-
-/* Responsivitet */
-@media (max-width: 768px) {
-    .faq-question {
-        padding: 1rem 1.25rem;
-    }
-    
-    .faq-question h3 {
-        font-size: 1rem;
-    }
-    
-    .faq-answer-inner {
-        padding: 0 1.25rem 1rem 1.25rem;
-    }
-    
-    .faq-answer-inner p {
-        font-size: 0.95rem;
-    }
-}
-        /* Om meg seksjon */
+        /* ── ABOUT ── */
         .about-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 3rem;
+            gap: 3.5rem;
             align-items: center;
         }
 
-        .about-image {
-            flex: 1;
-            min-width: 300px;
-            position: relative;
-        }
+        .about-image { flex: 1; min-width: 300px; }
 
         .image-wrapper {
             width: 100%;
             height: 400px;
-            background: linear-gradient(135deg, var(--secondary-accent), var(--primary-accent));
-            border-radius: 30px;
+            background: linear-gradient(135deg, var(--highlight), var(--secondary-accent));
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
+            border: 1px solid var(--border-subtle);
         }
 
-       
-        .image-wrapper i {
-            font-size: 6rem;
-            color: var(--text-dark);
-        }
+        .image-wrapper i { font-size: 6rem; color: var(--text-dark); }
 
-        .about-content {
-            flex: 1;
-            min-width: 300px;
-        }
+        .about-content { flex: 1; min-width: 300px; }
+        .about-content h2::after { left: 0; transform: none; }
+        .about-content h2::before { left: -2.4rem; }
 
-        .about-content h2::after {
-            left: 0;
-            transform: none;
-        }
-
-        /* Skjema */
+        /* ── FORM ── */
         form {
             display: flex;
             flex-direction: column;
@@ -705,47 +806,115 @@
             margin: 0 auto;
         }
 
-        .form-group {
-            position: relative;
-        }
-
         input, textarea, select {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-family: inherit;
+            padding: 0.9rem 1rem;
+            border: 1.5px solid rgba(74,158,170,0.2);
+            border-radius: 8px;
+            font-family: var(--font-body);
             background-color: var(--white);
             color: var(--text-dark);
             transition: all 0.3s ease;
+            font-size: 0.95rem;
         }
 
         input:focus, textarea:focus, select:focus {
             outline: none;
             border-color: var(--primary-accent);
-            box-shadow: 0 0 0 3px rgba(111, 179, 184, 0.1);
+            box-shadow: 0 0 0 3px rgba(74, 158, 170, 0.1);
         }
 
         .btn-submit {
-            background: linear-gradient(135deg, var(--text-dark), var(--primary-accent));
+            background: var(--text-dark);
             color: white;
-            padding: 1rem;
-            border-radius: 50px;
+            padding: 0.9rem;
+            border-radius: 8px;
+            font-family: var(--font-mono);
             font-weight: 600;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            font-size: 0.88rem;
+            letter-spacing: 0.5px;
         }
 
         .btn-submit:hover {
+            background: var(--primary-accent);
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
 
-        /* Footer */
+        /* ── FAQ ── */
+        .faq-container { max-width: 800px; margin: 0 auto; }
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 0.8rem;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover { border-color: rgba(74,158,170,0.3); }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 1.4rem;
+            cursor: pointer;
+            gap: 1rem;
+        }
+
+        .faq-question h3 {
+            margin: 0;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+            flex: 1;
+        }
+
+        .faq-item.active .faq-question h3 { color: var(--primary-accent); }
+
+        .faq-icon-wrapper {
+            position: relative; width: 28px; height: 28px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .faq-icon-wrapper i {
+            position: absolute;
+            font-size: 0.9rem;
+            color: var(--primary-accent);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .faq-icon-wrapper .fa-plus { opacity: 1; transform: rotate(0deg); }
+        .faq-icon-wrapper .fa-minus { opacity: 0; transform: rotate(-90deg); }
+        .faq-item.active .faq-icon-wrapper .fa-plus { opacity: 0; transform: rotate(90deg); }
+        .faq-item.active .faq-icon-wrapper .fa-minus { opacity: 1; transform: rotate(0deg); }
+
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .faq-item.active .faq-answer { max-height: 300px; }
+
+        .faq-answer-inner {
+            padding: 0 1.4rem 1.1rem 1.4rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .faq-answer-inner p {
+            margin: 0;
+            padding-top: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-mid);
+            font-size: 0.95rem;
+        }
+
+        /* ── FOOTER ── */
         footer {
-            background: linear-gradient(135deg, var(--text-dark), var(--dark-bg));
+            background: var(--darker-bg);
             color: var(--bg-color);
             text-align: center;
             position: relative;
@@ -755,30 +924,50 @@
         footer::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(74,158,170,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74,158,170,0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        footer::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--primary-accent), transparent);
         }
 
-        .footer-content {
-            position: relative;
-            z-index: 1;
+        .footer-content { position: relative; z-index: 1; }
+
+        .footer-content h3 {
+            font-family: var(--font-mono);
+            color: var(--white);
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-content > p:first-of-type {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--mono-comment);
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1.2rem;
             margin: 1.5rem 0;
         }
 
         .social-links a {
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+            width: 42px; height: 42px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -787,73 +976,133 @@
 
         .social-links a:hover {
             background: var(--primary-accent);
+            border-color: var(--primary-accent);
             transform: translateY(-3px);
         }
 
-        .social-links a i {
-            color: white;
-            font-size: 1.2rem;
+        .social-links a i { color: white; font-size: 1.1rem; }
+
+        .footer-links a {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: var(--mono-green);
+            letter-spacing: 0.3px;
         }
 
-        /* Responsivitet */
+        .footer-links a:hover { color: var(--primary-accent); }
+        .footer-links span { color: rgba(255,255,255,0.2); margin: 0 0.5rem; }
+
+        .footer-copy {
+            margin-top: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.25);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 960px) {
+            .hero-terminals { display: none; }
+        }
+
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-           
-            
-            #hero h1 {
-                font-size: 2rem;
-            }
-            
-            .container {
-                padding: 3rem 0;
-            }
-            
-            h2 {
-                font-size: 1.8rem;
-            }
-            
-            .process-steps {
-                grid-template-columns: 1fr;
-            }
+            .nav-links { display: none; }
+            #hero h1 { font-size: 2.1rem; }
+            .container { padding: 3.5rem 0; }
+            h2 { font-size: 1.7rem; }
+            h2::before { display: none; }
+            .process-steps { grid-template-columns: 1fr; }
+            .step:not(:last-child)::after { display: none; }
+            .section-header { padding-left: 0; }
         }
-
-     
-
     </style>
 </head>
 <body>
 
-
     <header>
         <nav>
-            <a href="#" class="logo">Webutvikler</a>
-            
-            </div>
+            <a href="#" class="logo">
+                <span class="bracket">&lt;</span>
+                <span class="name">Askeladden Webdesign</span>
+                <span class="bracket">/&gt;</span>
+                <span class="cursor-blink"></span>
+            </a>
             <ul class="nav-links">
-                <li><a href="#portefolje">Portefølje</a></li>
-                <li><a href="#tjenester">Tjenester</a></li>
-                <li><a href="#prosess">Prosess</a></li>
-                <li><a href="#om">Om meg</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
+                <li><a href="#portefolje"><span class="nav-num">01.</span>Portefølje</a></li>
+                <li><a href="#tjenester"><span class="nav-num">02.</span>Tjenester</a></li>
+                <li><a href="#prosess"><span class="nav-num">03.</span>Prosess</a></li>
+                <li><a href="#om"><span class="nav-num">04.</span>Om meg</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section id="hero">
+
+            <!-- Terminal cluster -->
+            <div class="hero-terminals">
+
+                <!-- Small top-left terminal -->
+                <div class="hero-terminal t-small">
+                    <div class="terminal-bar">
+                        <div class="t-dot red"></div>
+                        <div class="t-dot yellow"></div>
+                        <div class="t-dot green"></div>
+                    </div>
+                    <div class="terminal-body">
+                        <div><span class="t-comment">// style.css</span></div>
+                        <div>&nbsp;</div>
+                        <div><span class="t-teal">.hero</span> <span class="t-white">{</span></div>
+                        <div>&nbsp; <span class="t-yellow">display</span><span class="t-white">: flex;</span></div>
+                        <div>&nbsp; <span class="t-yellow">color</span><span class="t-white">:</span> <span class="t-green">#4A9EAA</span><span class="t-white">;</span></div>
+                        <div><span class="t-white">}</span></div>
+                    </div>
+                </div>
+
+                <!-- Main terminal -->
+                <div class="hero-terminal t-main">
+                    <div class="terminal-bar">
+                        <div class="t-dot red"></div>
+                        <div class="t-dot yellow"></div>
+                        <div class="t-dot green"></div>
+                    </div>
+                    <div class="terminal-body">
+                        <div><span class="t-comment">// nettside.js</span></div>
+                        <div>&nbsp;</div>
+                        <div><span class="t-green">const</span> <span class="t-teal">bedrift</span> <span class="t-white">= {</span></div>
+                        <div>&nbsp; <span class="t-yellow">navn</span><span class="t-white">:</span> <span class="t-teal">"Din bedrift"</span><span class="t-white">,</span></div>
+                        <div>&nbsp; <span class="t-yellow">nettside</span><span class="t-white">:</span> <span class="t-green">true</span><span class="t-white">,</span></div>
+                        <div>&nbsp; <span class="t-yellow">kunder</span><span class="t-white">:</span> <span class="t-teal">++</span></div>
+                        <div><span class="t-white">};</span></div>
+                        <div>&nbsp;</div>
+                        <div><span class="t-comment">// klar på 14 dager ✓</span></div>
+                        <div><span class="t-white">$ <span class="t-blink"></span></span></div>
+                    </div>
+                </div>
+
+                <!-- Bottom terminal -->
+                <div class="hero-terminal t-bottom">
+                    <div class="terminal-bar">
+                        <div class="t-dot red"></div>
+                        <div class="t-dot yellow"></div>
+                        <div class="t-dot green"></div>
+                    </div>
+                    <div class="terminal-body">
+                        <div><span class="t-comment">// server.js</span></div>
+                        <div>&nbsp;</div>
+                        <div><span class="t-green">app</span><span class="t-white">.</span><span class="t-teal">listen</span><span class="t-white">(</span><span class="t-yellow">3000</span><span class="t-white">);</span></div>
+                        <div><span class="t-green">✓</span> <span class="t-white">Nettside live!</span></div>
+                    </div>
+                </div>
+
+            </div>
+
             <div class="hero-content">
                 <div class="hero-badge">
+                    <span class="prompt">$</span>
                     <i class="fas fa-code"></i> Frilans webutvikler
                 </div>
-                <h1>Jeg hjelper bedrifter<br>lykkes på nett</h1>
+                <h1>Jeg hjelper bedrifter<br><span class="accent">lykkes på nett</span></h1>
                 <p>Estetiske, raske og moderne nettsider bygget for å konvertere besøkende til kunder.</p>
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="#kontakt" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Start ditt prosjekt</a>
-                    <a href="#portefolje" class="btn btn-outline"><i class="fas fa-eye"></i> Se portefølje</a>
-                </div>
             </div>
         </section>
 
@@ -861,67 +1110,187 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Utvalgte prosjekter</h2>
-                    <p>Eksempler på hva jeg kan lage. Merk at dette bare er maler og ikke refleksjon av faktiske kunder.</p>
+                    <p>Her er eksempler på hva jeg kan lage! Merk at dette bare er maler og ikke refleksjon av faktiske kunder.</p>
                 </div>
-                <div class="grid">
-                    <article class="card animate-on-scroll">
-                        <div class="card-image">
-                        <img src="images/tatovering.png" height="105%" alt="Tatoveringsstudio eksempel">    
-                        </div>
-                        <div class="card-content">
-                            
-                            <h3>Tatoveringsstudio</h3>
-                            
-                            <div class="tech-stack">
-                                <span>HTML5</span>
-                                <span>CSS3</span>
-                                <span>JavaScript</span>
-                                
+                <div class="project-list">
 
+                    <!-- Rad 1: kort venstre, illustrasjon høyre -->
+                    <div class="project-row animate-on-scroll">
+                        <article class="card">
+                            <div class="card-terminal-bar">
+                                <div class="t-dot red"></div>
+                                <div class="t-dot yellow"></div>
+                                <div class="t-dot green"></div>
+                                <span class="filename">tatovering<span class="ext">.html</span></span>
                             </div>
-                            <div class="btn-wrapper">
-                                <span class="funky-btn"><a href="#kontakt"></a></span>
+                            <div class="card-image">
+                                <img src="images/tatovering.png" alt="Tatoveringsstudio eksempel">
+                            </div>
+                            <div class="card-content">
+                                <div class="card-comment">// prosjekt_01</div>
+                                <h3>Tatoveringsstudio</h3>
+                                <div class="tech-stack">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="btn-wrapper">
+                                    <span class="funky-btn"><a href="tatoveringsstudio.html" class="page-link"></a></span>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="project-illustration">
+                            <div class="illus-terminal il-back-right">
+                                <div class="terminal-bar"><div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div></div>
+                                <div class="terminal-body">
+                                    <div><span class="t-comment">// gallery.js</span></div>
+                                    <div><span class="t-green">const</span> <span class="t-teal">imgs</span> <span class="t-white">= [];</span></div>
+                                    <div><span class="t-teal">imgs</span><span class="t-white">.push(</span><span class="t-yellow">"ink"</span><span class="t-white">);</span></div>
+                                </div>
+                            </div>
+                            <div class="illus-terminal il-back-left">
+                                <div class="terminal-bar"><div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div></div>
+                                <div class="terminal-body">
+                                    <div><span class="t-comment">// colors.css</span></div>
+                                    <div><span class="t-teal">--primary</span><span class="t-white">:</span></div>
+                                    <div>&nbsp; <span class="t-yellow">#6B2D8B</span><span class="t-white">;</span></div>
+                                    <div><span class="t-teal">--dark</span><span class="t-white">:</span> <span class="t-yellow">#1a1a2e</span><span class="t-white">;</span></div>
+                                </div>
+                            </div>
+                            <div class="illus-terminal il-main">
+                                <div class="terminal-bar"><div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div></div>
+                                <div class="terminal-body">
+                                    <div><span class="t-comment">// studio.js</span></div>
+                                    <div>&nbsp;</div>
+                                    <div><span class="t-green">const</span> <span class="t-teal">artists</span> <span class="t-white">= [</span></div>
+                                    <div>&nbsp; <span class="t-yellow">"Lars"</span><span class="t-white">,</span></div>
+                                    <div>&nbsp; <span class="t-yellow">"Mia"</span><span class="t-white">,</span></div>
+                                    <div><span class="t-white">];</span></div>
+                                    <div>&nbsp;</div>
+                                    <div><span class="t-green">✓</span> <span class="t-white">booking åpen</span></div>
+                                </div>
                             </div>
                         </div>
-                    </article>
+                    </div>
 
-                    <article class="card animate-on-scroll">
-                        <div class="card-image">
-                            <img src="images/restaurant.png" height="100%" alt="Restaurant nettside eksempel">
-                            
-                        </div>
-                        <div class="card-content">
-                            <h3>Kafé</h3>
-                            
-        
-                            <div class="tech-stack">
-                                <span>HTML5</span>
-                                <span>CSS3</span>
-                                <span>JavaScript</span>
+                    <!-- Rad 2: illustrasjon venstre, kort høyre -->
+                    <div class="project-row reverse animate-on-scroll">
+                        <article class="card">
+                            <div class="card-terminal-bar">
+                                <div class="t-dot red"></div>
+                                <div class="t-dot yellow"></div>
+                                <div class="t-dot green"></div>
+                                <span class="filename">kafe<span class="ext">.html</span></span>
                             </div>
-                            <div class="btn-wrapper">
-                                <span class="funky-btn"><a href="eksempel_restaurant.html"></a></span>
+                            <div class="card-image">
+                                <img src="images/restaurant.png" alt="Restaurant nettside eksempel">
+                            </div>
+                            <div class="card-content">
+                                <div class="card-comment">// prosjekt_02</div>
+                                <h3>Kafé</h3>
+                                <div class="tech-stack">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="btn-wrapper">
+                                    <span class="funky-btn"><a href="eksempel_restaurant.html" class="page-link"></a></span>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="project-illustration">
+                            <div class="illus-terminal il-back-right">
+                                <div class="terminal-bar"><div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div></div>
+                                <div class="terminal-body">
+                                    <div><span class="t-comment">// menu.json</span></div>
+                                    <div><span class="t-white">{</span></div>
+                                    <div>&nbsp;<span class="t-yellow">"kaffe"</span><span class="t-white">: </span><span class="t-green">45</span><span class="t-white">,</span></div>
+                                    <div><span class="t-white">}</span></div>
+                                </div>
+                            </div>
+                            <div class="illus-terminal il-back-left">
+                                <div class="terminal-bar"><div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div></div>
+                                <div class="terminal-body">
+                                    <div><span class="t-comment">// theme.css</span></div>
+                                    <div><span class="t-teal">--warm</span><span class="t-white">:</span> <span class="t-yellow">#C8874A</span><span class="t-white">;</span></div>
+                                    <div><span class="t-teal">--cream</span><span class="t-white">:</span> <span class="t-yellow">#F5ECD7</span><span class="t-white">;</span></div>
+                                </div>
+                            </div>
+                            <div class="illus-terminal il-main">
+                                <div class="terminal-bar"><div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div></div>
+                                <div class="terminal-body">
+                                    <div><span class="t-comment">// kafe.js</span></div>
+                                    <div>&nbsp;</div>
+                                    <div><span class="t-green">const</span> <span class="t-teal">apningstider</span> <span class="t-white">= {</span></div>
+                                    <div>&nbsp; <span class="t-yellow">man_fre</span><span class="t-white">:</span> <span class="t-teal">"08-18"</span><span class="t-white">,</span></div>
+                                    <div>&nbsp; <span class="t-yellow">helg</span><span class="t-white">:</span> <span class="t-teal">"09-16"</span></div>
+                                    <div><span class="t-white">};</span></div>
+                                    <div>&nbsp;</div>
+                                    <div><span class="t-green">✓</span> <span class="t-white">bestilling aktiv</span></div>
+                                </div>
                             </div>
                         </div>
-                    </article>
+                    </div>
 
-                    <article class="card animate-on-scroll">
-                        <div class="card-image">
-                            <img src="images/elektriker2.png" height="100%" alt="Elektrikerfirma eksempel">   
-                        </div>
-                        <div class="card-content">
-                            <h3>Elektrikerfirma</h3>
-                        
-                            <div class="tech-stack">
-                                <span>HTML5</span>
-                                <span>CSS3</span>
-                                <span>JavaScript</span>
+                    <!-- Rad 3: kort venstre, illustrasjon høyre -->
+                    <div class="project-row animate-on-scroll">
+                        <article class="card">
+                            <div class="card-terminal-bar">
+                                <div class="t-dot red"></div>
+                                <div class="t-dot yellow"></div>
+                                <div class="t-dot green"></div>
+                                <span class="filename">elektriker<span class="ext">.html</span></span>
                             </div>
-                            <div class="btn-wrapper">
-                                <span class="funky-btn"><a href="elektrikerbedrift.html"></a></span>
+                            <div class="card-image">
+                                <img src="images/elektriker2.png" alt="Elektrikerfirma eksempel">
+                            </div>
+                            <div class="card-content">
+                                <div class="card-comment">// prosjekt_03</div>
+                                <h3>Elektrikerfirma</h3>
+                                <div class="tech-stack">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="btn-wrapper">
+                                    <span class="funky-btn"><a href="elektrikerbedrift.html" class="page-link"></a></span>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="project-illustration">
+                            <div class="illus-terminal il-back-right">
+                                <div class="terminal-bar"><div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div></div>
+                                <div class="terminal-body">
+                                    <div><span class="t-comment">// priser.json</span></div>
+                                    <div><span class="t-white">{</span></div>
+                                    <div>&nbsp;<span class="t-yellow">"time"</span><span class="t-white">: </span><span class="t-green">895</span><span class="t-white">,</span></div>
+                                    <div><span class="t-white">}</span></div>
+                                </div>
+                            </div>
+                            <div class="illus-terminal il-back-left">
+                                <div class="terminal-bar"><div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div></div>
+                                <div class="terminal-body">
+                                    <div><span class="t-comment">// theme.css</span></div>
+                                    <div><span class="t-teal">--gul</span><span class="t-white">:</span> <span class="t-yellow">#F5C518</span><span class="t-white">;</span></div>
+                                    <div><span class="t-teal">--mork</span><span class="t-white">:</span> <span class="t-yellow">#1C1C1C</span><span class="t-white">;</span></div>
+                                </div>
+                            </div>
+                            <div class="illus-terminal il-main">
+                                <div class="terminal-bar"><div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div></div>
+                                <div class="terminal-body">
+                                    <div><span class="t-comment">// elektriker.js</span></div>
+                                    <div>&nbsp;</div>
+                                    <div><span class="t-green">const</span> <span class="t-teal">tjenester</span> <span class="t-white">= [</span></div>
+                                    <div>&nbsp; <span class="t-yellow">"Sikringsskap"</span><span class="t-white">,</span></div>
+                                    <div>&nbsp; <span class="t-yellow">"Varmepumpe"</span><span class="t-white">,</span></div>
+                                    <div><span class="t-white">];</span></div>
+                                    <div>&nbsp;</div>
+                                    <div><span class="t-green">✓</span> <span class="t-white">kontakt oss</span></div>
+                                </div>
                             </div>
                         </div>
-                    </article>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -930,25 +1299,22 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Hva jeg tilbyr</h2>
-                    <p>Skreddersydde løsninger for din bedrift</p>
                 </div>
                 <div class="grid">
-                    <div class="service-card animate-on-scroll">
+                    <div class="service-card animate-on-scroll" data-label="fn_01()">
                         <i class="fas fa-mobile-alt"></i>
                         <h3>Responsivt Design</h3>
-                        <p>Skreddersydd design som ser like bra ut på mobil som på PC, med fokus på brukeropplevelse.</p>
+                        <p>Skreddersydd design som ser like bra ut på mobil som på PC</p>
                     </div>
-                    
-                    <div class="service-card animate-on-scroll">
+                    <div class="service-card animate-on-scroll" data-label="fn_02()">
                         <i class="fas fa-chart-line"></i>
-                        <h3>SEO-Optimalisering</h3>
-                        <p>Teknisk SEO og innholdsoptimalisering som sikrer at kundene finner deg organisk på Google.</p>
+                        <h3>Det tekniske</h3>
+                        <p>Jeg fikser hosting, domene og har bugfixing-garanti</p>
                     </div>
-                    
-                    <div class="service-card animate-on-scroll">
+                    <div class="service-card animate-on-scroll" data-label="fn_03()">
                         <i class="fas fa-rocket"></i>
-                        <h3>Konverteringsoptimalisering</h3>
-                        <p>Strategisk oppsett for å lede besøkende til å ta kontakt eller gjennomføre kjøp.</p>
+                        <h3>Online bestilling</h3>
+                        <p>Bestillingsskjemaer hvor bestillingen blir sendte direkte til eposten deres.</p>
                     </div>
                 </div>
             </div>
@@ -962,153 +1328,113 @@
                 </div>
                 <div class="process-steps">
                     <div class="step animate-on-scroll">
-                        <div class="step-number">1</div>
+                        <div class="step-number">01</div>
                         <h3>Gratis demo</h3>
-                        <p>Har du lyst til å se hvordan jeg kan hjelpe deg med din nettside? Da kan jeg lage en gratis demo!</p>
+                        <p>Har du lyst til å se hvordan jeg kan hjelpe deg med din nettside? Da kan jeg lage en gratis demo:)</p>
                     </div>
                     <div class="step animate-on-scroll">
-                        <div class="step-number">2</div>
-                        <h3>Kartlegging</h3>
-                        <p>Vi blir enige om funksjonalitet, design og tekniske krav.</p>
+                        <div class="step-number">02</div>
+                        <h3>Møte</h3>
+                        <p>Du kommer med dine krav om funksjonalitet og design.</p>
                     </div>
                     <div class="step animate-on-scroll">
-                        <div class="step-number">3</div>
+                        <div class="step-number">03</div>
                         <h3>Utvikling</h3>
-                        <p>Nettsiden bygges med fokus på estetikk, hastighet og universell utforming.</p>
+                        <p>Nettsiden bygges med fokus på å få deg til å konverte kunder.</p>
                     </div>
                     <div class="step animate-on-scroll">
-                        <div class="step-number">4</div>
+                        <div class="step-number">04</div>
                         <h3>Lansering</h3>
-                        <p>Jeg fikser hosting, domene og sikkerhet for din nettside.</p>
-                    </div>
-                </div>
-                <div style="text-align: center;">
-                    <p>Har du flere spørsmål? <a href="#faq" style="font-weight: bold; color: var(--primary-accent);">Sjekk ofte stilte spørsmål</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="om" style="background-color: var(--white);">
-            <div class="container">
-                <div class="about-grid">
-                    <div class="about-image animate-on-scroll">
-                        <div class="image-wrapper">
-                            <i class="fas fa-user-circle"></i>
-                        </div>
-                    </div>
-                    <div class="about-content animate-on-scroll">
-                        <h2>Hei!</h2>
-                        <p style="margin-bottom: 1rem;">Jeg brenner for å hjelpe bedrifter med å finne kunder i den digitale verden. Med et øye for design og kode bygger jeg nettsider som ikke bare ser bra ut, men som også fungerer optimalt.</p>
-                        
-                        <div class="tech-stack" style="margin-top: 1.5rem;">
-                            <span>Javascript</span>
-                            <span>CSS</span>
-                            <span>Python</span>
-                            <span>HTML</span>
-                            <span>Formspree</span>
-                            
-                        </div>
+                        <p>Jeg fikser hosting, domene og vedlikehold for nettsiden - inkludert bugfixing-garanti.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-</main>
+    </main>
 
     <footer>
         <div class="container footer-content">
-            <h3 style="color: white; margin-bottom: 1rem;">Nikolai</h3>
-            <p>Webdesigner & Utvikler</p>
-            <div class="social-links">
-                
-                
+            <h3>Askeladden Webdesign</h3>
+            <div class="social-links"></div>
+            <div class="footer-links">
+                <a href="mailto:nikolai.and.askedal@gmail.com"><span>nikolai.and.askedal@gmail.com</span></a>
+                <span>|</span>
+                <a href="tel:45088623">+47 450 88 623</a>
             </div>
-            <p>
-                <a href="mailto:nikolai.and.askedal@gmail.com" style="color: var(--secondary-accent);">nikolai.and.askedal@gmail.com</a> | 
-                <a href="tel:45088623" style="color: var(--secondary-accent);">+47 450 88 623</a>
-            </p>
-            <p style="margin-top: 2rem; font-size: 0.9rem;">&copy; 2026. Alle rettigheter reservert.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+            <p class="footer-copy">&copy; 2026. Alle rettigheter reservert.</p>
         </div>
     </footer>
 
-    <script>
-    // Scroll animasjoner
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+        document.querySelectorAll('.animate-on-scroll').forEach((el, i) => {
+            el.style.animationDelay = `${i * 0.07}s`;
+            observer.observe(el);
         });
-    }, observerOptions);
 
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-        observer.observe(el);
-    });
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
 
-    // Smooth scrolling for alle interne lenker
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+        // Sticky header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.style.background = window.scrollY > 100
+                ? 'rgba(244, 242, 236, 0.98)'
+                : 'rgba(244, 242, 236, 0.93)';
+        });
+
+        // FAQ accordion
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.querySelector('.faq-question').addEventListener('click', () => {
+                    item.classList.toggle('active');
                 });
-            }
+            });
         });
-    });
 
-    // Form submit handling
-    const bookingForm = document.querySelector('form');
-    if (bookingForm) {
-        bookingForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Takk for henvendelsen! Jeg kontakter deg innen 24 timer.');
-            this.reset();
-        });
-    }
-
-    // Sticky header effect
-    window.addEventListener('scroll', () => {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(246, 246, 242, 0.98)';
-            header.style.padding = '0.8rem 5%';
-        } else {
-            header.style.background = 'rgba(246, 246, 242, 0.95)';
-            header.style.padding = '1rem 5%';
+        // Form
+        const bookingForm = document.querySelector('form');
+        if (bookingForm) {
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Takk for henvendelsen! Jeg kontakter deg innen 24 timer.');
+                this.reset();
+            });
         }
-    });
 
-    
+        // Page zoom transition
+        document.body.insertAdjacentHTML('beforeend', '<div class="zoom-overlay"></div>');
+        const overlay = document.querySelector('.zoom-overlay');
+        document.body.classList.add('page-entering');
 
- 
-    //Add animation delay to elements for staggered effect
-    const animateElements = document.querySelectorAll('.animate-on-scroll');
-    animateElements.forEach((el, index) => {
-        el.style.transitionDelay = `${index * 0.05}s`;
-    });
+        document.querySelectorAll('a.page-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
 
-    // FAQ Accordion - Flere kan være åpne samtidig
-document.addEventListener('DOMContentLoaded', function() {
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        
-        question.addEventListener('click', () => {
-            // Bare toggle current item - ingen andre lukkes
-            item.classList.toggle('active');
+                const card = this.closest('.card');
+                const rect = card.getBoundingClientRect();
+                const originX = rect.left + rect.width / 2;
+                const originY = rect.top + rect.height / 2;
+                overlay.style.transformOrigin = `${originX}px ${originY}px`;
+
+                overlay.classList.add('zoom-out');
+                setTimeout(() => { window.location.href = href; }, 520);
+            });
         });
-    });
-});
- 
-   
-</script>
+    </script>
+</body>
+</html>
