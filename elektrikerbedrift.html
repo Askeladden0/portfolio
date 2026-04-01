@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nikolai Elektro AS – Din lokale elektriker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --yellow: #FFD000;
+      --yellow-dark: #E6BB00;
+      --black: #0D0D0D;
+      --dark: #141414;
+      --dark2: #1C1C1C;
+      --dark3: #242424;
+      --mid: #2E2E2E;
+      --light: #A8A8A8;
+      --white: #F5F5F0;
+      --red: #FF4444;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(13,13,13,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,208,0,0.12);
+    }
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1.6rem; letter-spacing: 0.04em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--yellow); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--light);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--yellow); }
+    .nav-cta {
+      background: var(--yellow); color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 0.9rem; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.6rem 1.6rem;
+      border: none; cursor: pointer; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--yellow-dark); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 10rem 4rem 6rem 4rem;
+      position: relative; z-index: 2;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,208,0,0.12); border: 1px solid rgba(255,208,0,0.3);
+      color: var(--yellow); font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.4rem 1rem; margin-bottom: 2rem; width: fit-content;
+    }
+    .hero-badge::before { content: '⚡'; }
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(3.5rem, 7vw, 6.5rem);
+      line-height: 0.92; text-transform: uppercase; letter-spacing: -0.01em;
+      margin-bottom: 1.8rem;
+    }
+    .hero-title em { color: var(--yellow); font-style: normal; }
+    .hero-sub {
+      font-size: 1.05rem; font-weight: 300; color: var(--light);
+      line-height: 1.7; max-width: 420px; margin-bottom: 3rem;
+    }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--yellow); color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1rem; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 1rem 2.4rem;
+      border: none; cursor: pointer; text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--yellow-dark); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1rem; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 1rem 2.4rem;
+      border: 1px solid rgba(255,255,255,0.25); cursor: pointer;
+      text-decoration: none; transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--yellow); color: var(--yellow); }
+    .hero-stats {
+      display: flex; gap: 3rem; margin-top: 4rem;
+      border-top: 1px solid var(--mid); padding-top: 2.5rem;
+    }
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 2.4rem; color: var(--yellow);
+    }
+    .stat-label { font-size: 0.78rem; color: var(--light); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.2rem; }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+    }
+    .hero-image-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--dark2) 0%, var(--dark3) 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1rem; color: var(--mid);
+      border-left: 4px solid var(--yellow);
+    }
+    .hero-image-placeholder svg { opacity: 0.18; }
+    .hero-image-placeholder p { font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.4; }
+    .hero-diagonal {
+      position: absolute; left: -40px; top: 0; bottom: 0; width: 80px;
+      background: var(--black);
+      clip-path: polygon(0 0, 100% 0, 0 100%);
+      z-index: 3;
+    }
+    .hero-tag {
+      position: absolute; bottom: 2rem; right: 2rem;
+      background: var(--yellow); color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 0.85rem; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.6rem 1.2rem; z-index: 4;
+    }
+    .scroll-indicator {
+      position: absolute; bottom: 2.5rem; left: 4rem;
+      display: flex; align-items: center; gap: 0.8rem;
+      color: var(--light); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 40px; height: 1px; background: var(--yellow);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100%{width:40px} 50%{width:70px} }
+
+    /* ── SERVICES ── */
+    #tjenester {
+      padding: 7rem 4rem;
+      background: var(--dark);
+    }
+    .section-header { margin-bottom: 4rem; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--yellow);
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+    }
+    .section-label::after { content:''; flex:1; height:1px; background:var(--yellow); opacity:0.3; }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(2.5rem, 5vw, 4rem);
+      text-transform: uppercase; line-height: 1;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--mid);
+    }
+    .service-card {
+      background: var(--dark2);
+      padding: 2.5rem;
+      position: relative; overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: var(--yellow);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover { background: var(--dark3); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      font-size: 2rem; margin-bottom: 1.5rem;
+      display: block;
+    }
+    .service-num {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 4rem; color: rgba(255,255,255,0.04);
+      line-height: 1;
+    }
+    .service-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.4rem; text-transform: uppercase;
+      letter-spacing: 0.04em; margin-bottom: 0.8rem;
+    }
+    .service-desc { font-size: 0.88rem; color: var(--light); line-height: 1.65; }
+
+    /* ── WHY US ── */
+    #hvorfor { padding: 7rem 4rem; background: var(--black); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; margin-top: 4rem; }
+    .why-image-side {
+      position: relative;
+    }
+    .why-image-box {
+      width: 100%; aspect-ratio: 4/3;
+      background: var(--dark2);
+      border: 1px solid var(--mid);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--mid); flex-direction: column; gap: 1rem;
+    }
+    .why-image-box svg { opacity: 0.2; }
+    .why-image-box p { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.4; }
+    .accent-box {
+      position: absolute; bottom: -2rem; right: -2rem;
+      background: var(--yellow); color: var(--black);
+      padding: 1.5rem 2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase;
+      line-height: 1.3;
+    }
+    .accent-box strong { display: block; font-size: 2.5rem; line-height: 1; }
+    .why-points { display: flex; flex-direction: column; gap: 2rem; }
+    .why-point { display: flex; gap: 1.5rem; align-items: flex-start; }
+    .why-point-icon {
+      flex-shrink: 0; width: 48px; height: 48px;
+      background: rgba(255,208,0,0.1); border: 1px solid rgba(255,208,0,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .why-point-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1.15rem; text-transform: uppercase;
+      letter-spacing: 0.05em; margin-bottom: 0.4rem;
+    }
+    .why-point-desc { font-size: 0.88rem; color: var(--light); line-height: 1.65; }
+
+    /* ── REVIEWS ── */
+    #anmeldelser {
+      padding: 7rem 4rem;
+      background: var(--dark);
+    }
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem;
+    }
+    .review-card {
+      background: var(--dark2); padding: 2rem;
+      border: 1px solid var(--mid);
+      position: relative;
+      transition: border-color 0.3s;
+    }
+    .review-card:hover { border-color: rgba(255,208,0,0.3); }
+    .review-stars { color: var(--yellow); font-size: 1rem; letter-spacing: 0.1em; margin-bottom: 1.2rem; }
+    .review-text { font-size: 0.9rem; color: var(--light); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+    .review-author { display: flex; align-items: center; gap: 1rem; }
+    .review-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--mid); display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem;
+      color: var(--yellow);
+    }
+    .review-name { font-weight: 600; font-size: 0.9rem; }
+    .review-date { font-size: 0.75rem; color: var(--light); }
+    .review-quote {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-size: 3rem; color: rgba(255,208,0,0.1);
+      font-family: Georgia, serif; line-height: 1;
+    }
+    .google-badge {
+      display: flex; align-items: center; gap: 0.5rem; margin-top: 3rem;
+      font-size: 0.85rem; color: var(--light);
+    }
+    .google-badge strong { color: var(--yellow); font-size: 1.3rem; }
+
+    /* ── BOOKING ── */
+    #bestilling {
+      padding: 7rem 4rem;
+      background: var(--black);
+    }
+    .booking-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 6rem; margin-top: 4rem; align-items: start; }
+    .booking-info h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.5rem; text-transform: uppercase;
+      margin-bottom: 1rem; color: var(--yellow);
+    }
+    .booking-info p { color: var(--light); font-size: 0.9rem; line-height: 1.7; margin-bottom: 2rem; }
+    .contact-item { display: flex; gap: 1rem; align-items: center; margin-bottom: 1.2rem; }
+    .contact-item-icon {
+      width: 40px; height: 40px; background: rgba(255,208,0,0.1);
+      border: 1px solid rgba(255,208,0,0.2);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-item-text { font-size: 0.9rem; }
+    .contact-item-text span { display: block; font-size: 0.75rem; color: var(--light); text-transform: uppercase; letter-spacing: 0.1em; }
+    .booking-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--light);
+    }
+    .form-input, .form-select, .form-textarea {
+      background: var(--dark2); border: 1px solid var(--mid);
+      color: var(--white); font-family: 'Barlow', sans-serif;
+      font-size: 0.95rem; padding: 0.9rem 1.1rem;
+      outline: none; transition: border-color 0.2s;
+      appearance: none; width: 100%;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--yellow);
+    }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23FFD000' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+    .form-submit {
+      background: var(--yellow); color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1.1rem; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 1.1rem 2rem;
+      border: none; cursor: pointer; transition: background 0.2s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover { background: var(--yellow-dark); transform: translateY(-2px); }
+
+    /* ── MAP ── */
+    #kart {
+      background: var(--dark);
+      padding: 7rem 4rem;
+    }
+    .map-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; margin-top: 4rem; align-items: start; }
+    .map-info h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.3rem; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .map-info-item { margin-bottom: 1.4rem; }
+    .map-info-item .label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--yellow); margin-bottom: 0.3rem; }
+    .map-info-item .value { font-size: 0.92rem; color: var(--light); line-height: 1.6; }
+    .map-frame {
+      width: 100%; height: 400px; border: none;
+      filter: grayscale(40%) contrast(1.1);
+      border: 2px solid var(--mid);
+    }
+
+    /* ── CALL BUTTON ── */
+    .call-button {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+      display: flex; align-items: center; justify-content: center;
+      width: 64px; height: 64px;
+      background: var(--yellow);
+      box-shadow: 0 4px 24px rgba(255,208,0,0.4);
+      text-decoration: none;
+      animation: callPulse 2.5s ease-in-out infinite;
+      transition: transform 0.2s;
+    }
+    .call-button:hover { transform: scale(1.1); animation: none; background: var(--yellow-dark); }
+    .call-button svg { width: 28px; height: 28px; fill: var(--black); }
+    .call-button-label {
+      position: absolute; right: 75px; background: var(--black);
+      color: var(--yellow); font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.5rem 1rem; white-space: nowrap;
+      border: 1px solid rgba(255,208,0,0.3);
+      opacity: 0; transform: translateX(10px);
+      transition: opacity 0.2s, transform 0.2s;
+      pointer-events: none;
+    }
+    .call-button:hover .call-button-label { opacity: 1; transform: translateX(0); }
+    @keyframes callPulse {
+      0%,100% { box-shadow: 0 4px 24px rgba(255,208,0,0.4); }
+      50% { box-shadow: 0 4px 40px rgba(255,208,0,0.7), 0 0 0 12px rgba(255,208,0,0.08); }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark2);
+      border-top: 1px solid var(--mid);
+      padding: 5rem 4rem 2rem;
+    }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+    .footer-brand .logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1.8rem; color: var(--white); margin-bottom: 1rem;
+    }
+    .footer-brand .logo span { color: var(--yellow); }
+    .footer-brand p { font-size: 0.87rem; color: var(--light); line-height: 1.7; max-width: 280px; }
+    .footer-cert {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,208,0,0.08); border: 1px solid rgba(255,208,0,0.2);
+      color: var(--yellow); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.4rem 0.9rem; margin-top: 1.2rem;
+    }
+    .footer-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1rem; text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 1.5rem; color: var(--yellow);
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer-links a { font-size: 0.87rem; color: var(--light); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--yellow); }
+    .footer-bottom {
+      border-top: 1px solid var(--mid); padding-top: 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem; color: var(--light);
+    }
+    .footer-bottom a { color: var(--light); text-decoration: none; }
+    .footer-bottom a:hover { color: var(--yellow); }
+
+    /* ── ANIMATIONS ── */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 8rem 1.5rem 4rem; }
+      .services-grid, .reviews-grid { grid-template-columns: 1fr; }
+      .booking-grid, .why-grid, .map-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      section, #hero { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+      #tjenester, #hvorfor, #anmeldelser, #bestilling, #kart { padding: 4rem 1.5rem; }
+      footer { padding: 3rem 1.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>NIKOLAI</span> <span>ELEKTRO</span></a>
+  <ul class="nav-links">
+    <li><a href="#tjenester">Tjenester</a></li>
+    <li><a href="#hvorfor">Om oss</a></li>
+    <li><a href="#anmeldelser">Anmeldelser</a></li>
+    <li><a href="#kart">Kontakt</a></li>
+  </ul>
+  <a class="nav-cta" href="#bestilling">Bestill nå</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Autorisert elektrikerbedrift · Stavanger</div>
+    <h1 class="hero-title">
+      TRYGG<br/><em>STRØM</em><br/>LEVERT
+    </h1>
+    <p class="hero-sub">
+      Nikolai Elektro løser alle elektriske oppdrag – fra enkle installasjoner til store industriprosjekter. Godkjent, forsikret og alltid tilgjengelig.
+    </p>
+    <div class="hero-buttons">
+      <a class="btn-primary" href="#bestilling">Bestill befaring</a>
+      <a class="btn-outline" href="#tjenester">Se tjenester</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">18+</div>
+        <div class="stat-label">År i bransjen</div>
+      </div>
+      <div>
+        <div class="stat-num">2400+</div>
+        <div class="stat-label">Oppdrag fullført</div>
+      </div>
+      <div>
+        <div class="stat-num">4.9 ★</div>
+        <div class="stat-label">Google-vurdering</div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      Scroll ned
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-diagonal"></div>
+    <div class="hero-image-placeholder">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="80" height="80" rx="4" fill="#FFD000"/>
+        <path d="M44 12L20 46H40L36 68L60 34H40L44 12Z" fill="#0D0D0D"/>
+      </svg>
+      <p>Bilde av elektriker / prosjekt</p>
+    </div>
+    <div class="hero-tag">⚡ Godkjent fagmann</div>
+  </div>
+</section>
+
+<!-- TJENESTER -->
+<section id="tjenester">
+  <div class="section-header fade-in">
+    <div class="section-label">Hva vi gjør</div>
+    <h2 class="section-title">Våre tjenester</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <span class="service-num">01</span>
+      <span class="service-icon">🏠</span>
+      <div class="service-name">Bolig &amp; Eiendom</div>
+      <div class="service-desc">Fullstendig elektroinstallasjon, oppgradering av sikringsskap, stikkontakter, lys og varmeanlegg for privatboliger.</div>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-num">02</span>
+      <span class="service-icon">🏢</span>
+      <div class="service-name">Næring &amp; Kontor</div>
+      <div class="service-desc">Kommersiell elektrisk planlegging og installasjon. Vi sikrer at næringsbygg er i tråd med gjeldende forskrifter.</div>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-num">03</span>
+      <span class="service-icon">⚡</span>
+      <div class="service-name">Elbil-lader</div>
+      <div class="service-desc">Installasjon av hjemmelader og bedriftslading. Vi monterer alle ledende merker og tilpasser etter behov.</div>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-num">04</span>
+      <span class="service-icon">🔌</span>
+      <div class="service-name">Sikringsskap</div>
+      <div class="service-desc">Oppgradering og bytte av gammelt sikringsskap. Moderne jordfeilbrytere, automatsikringer og kurs-oversikt.</div>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-num">05</span>
+      <span class="service-icon">💡</span>
+      <div class="service-name">Belysning</div>
+      <div class="service-desc">LED-konvertering, utebelysning, smarthjem-integrasjon og skreddersydde lysdesign-løsninger.</div>
+    </div>
+    <div class="service-card fade-in">
+      <span class="service-num">06</span>
+      <span class="service-icon">🚨</span>
+      <div class="service-name">Alarm &amp; Sikring</div>
+      <div class="service-desc">Installasjon av brannvarsling, tyverialarm og tilgangskontroll. Vi samarbeider med de ledende leverandørene.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HVORFOR OSS -->
+<section id="hvorfor">
+  <div class="section-header fade-in">
+    <div class="section-label">Hvorfor velge oss</div>
+    <h2 class="section-title">Kvalitet du<br/>kan stole på</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-image-side fade-in">
+      <div class="why-image-box">
+        <svg width="60" height="60" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="4" fill="#FFD000"/><path d="M44 12L20 46H40L36 68L60 34H40L44 12Z" fill="#0D0D0D"/></svg>
+        <p>Bilde av team / arbeid</p>
+      </div>
+      <div class="accent-box">
+        <strong>100%</strong>
+        Tilfredse kunder garantert
+      </div>
+    </div>
+    <div class="why-points fade-in">
+      <div class="why-point">
+        <div class="why-point-icon">✅</div>
+        <div>
+          <div class="why-point-title">Autorisert og forsikret</div>
+          <div class="why-point-desc">Vi er godkjent av Elsikkerhetsportalen og innehar alle nødvendige tillatelser. Alt arbeid dokumenteres og er i samsvar med NEK 400.</div>
+        </div>
+      </div>
+      <div class="why-point">
+        <div class="why-point-icon">⏱️</div>
+        <div>
+          <div class="why-point-title">Rask respons</div>
+          <div class="why-point-desc">Vi svarer innen 1 time i arbeidstiden og tilbyr akuttjeneste ved feil som utgjør en sikkerhetsrisiko.</div>
+        </div>
+      </div>
+      <div class="why-point">
+        <div class="why-point-icon">💰</div>
+        <div>
+          <div class="why-point-title">Fast pris – ingen overraskelser</div>
+          <div class="why-point-desc">Du får alltid et skriftlig tilbud før arbeidet starter. Ingen skjulte kostnader, ingen ubehagelige overraskelser.</div>
+        </div>
+      </div>
+      <div class="why-point">
+        <div class="why-point-icon">🌱</div>
+        <div>
+          <div class="why-point-title">Lokalt og bærekraftig</div>
+          <div class="why-point-desc">Basert i Stavanger siden 2007. Vi støtter lokalsamfunnet og anbefaler energieffektive løsninger som sparer deg penger.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANMELDELSER -->
+<section id="anmeldelser">
+  <div class="section-header fade-in">
+    <div class="section-label">Hva kundene sier</div>
+    <h2 class="section-title">Anmeldelser</h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card fade-in">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Ekstremt profesjonelt! De kom samme dag, oppdaget feilen raskt og fikset alt på under to timer. Prisvennlig og ryddig. Anbefales på det sterkeste!</p>
+      <div class="review-author">
+        <div class="review-avatar">AH</div>
+        <div>
+          <div class="review-name">Anne Håland</div>
+          <div class="review-date">Februar 2025 · Google</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-in">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Bestilte installasjon av elbil-lader. Alt gikk smertefritt – de hjalp til med søknaden til Enova også. Topp service fra start til slutt.</p>
+      <div class="review-author">
+        <div class="review-avatar">TN</div>
+        <div>
+          <div class="review-name">Tor Nilsen</div>
+          <div class="review-date">Januar 2025 · Google</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-in">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Brukte Nikolai Elektro til totalrenovering av elektroanlegget i gammel bolig. Grundig, ryddig og holdt tidsplan. Veldig fornøyd med resultatet!</p>
+      <div class="review-author">
+        <div class="review-avatar">LB</div>
+        <div>
+          <div class="review-name">Lise Bergström</div>
+          <div class="review-date">Desember 2024 · Google</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-in">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Hyggelige og kompetente folk. Installerte nytt sikringsskap og la opp nye kurs. Forklarte hva de gjorde underveis, og prisen var som avtalt.</p>
+      <div class="review-author">
+        <div class="review-avatar">KS</div>
+        <div>
+          <div class="review-name">Kjetil Sørheim</div>
+          <div class="review-date">November 2024 · Google</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-in">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Kontaktet dem etter en kortslutning sent på kvelden. Fikk svar innen 20 minutter og hjelp neste morgen tidlig. Imponerende beredskap!</p>
+      <div class="review-author">
+        <div class="review-avatar">MR</div>
+        <div>
+          <div class="review-name">Marte Rolfsen</div>
+          <div class="review-date">Oktober 2024 · Google</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-in">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Har brukt dem to ganger nå, og begge ganger har det vært upåklagelig. Ryddige etter seg, punktlige og priser man kan forsvare. Blir definitivt stamkunde!</p>
+      <div class="review-author">
+        <div class="review-avatar">PS</div>
+        <div>
+          <div class="review-name">Pål Stavland</div>
+          <div class="review-date">September 2024 · Google</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="google-badge fade-in">
+    <strong>4.9 ★</strong> &nbsp;Basert på 180+ Google-anmeldelser
+  </div>
+</section>
+
+<!-- BESTILLING -->
+<section id="bestilling">
+  <div class="section-header fade-in">
+    <div class="section-label">Kom i gang</div>
+    <h2 class="section-title">Bestill befaring<br/>eller tilbud</h2>
+  </div>
+  <div class="booking-grid">
+    <div class="booking-info fade-in">
+      <h3>Vi tar kontakt</h3>
+      <p>Fyll ut skjemaet, så ringer vi deg innen 1 arbeidstime for å avtale befaring eller gi deg et raskt prisestimat på telefon.</p>
+      <div class="contact-item">
+        <div class="contact-item-icon">📞</div>
+        <div class="contact-item-text">
+          <span>Telefon</span>
+          <strong>+47 51 23 45 67</strong>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">✉️</div>
+        <div class="contact-item-text">
+          <span>E-post</span>
+          <strong>post@nikolaielektro.no</strong>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">⏰</div>
+        <div class="contact-item-text">
+          <span>Åpningstider</span>
+          <strong>Man–Fre: 07:00–17:00</strong>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🚨</div>
+        <div class="contact-item-text">
+          <span>Akutt / Vakt</span>
+          <strong>+47 91 00 11 22</strong>
+        </div>
+      </div>
+    </div>
+    <div class="fade-in">
+      <form class="booking-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Fornavn</label>
+            <input class="form-input" type="text" placeholder="Kari" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Etternavn</label>
+            <input class="form-input" type="text" placeholder="Nordmann" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Telefon</label>
+            <input class="form-input" type="tel" placeholder="+47 XXX XX XXX" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">E-post</label>
+            <input class="form-input" type="email" placeholder="kari@eksempel.no" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Adresse</label>
+          <input class="form-input" type="text" placeholder="Gaten 12, Stavanger" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Type oppdrag</label>
+          <select class="form-select form-input">
+            <option value="">Velg tjeneste...</option>
+            <option>Boliginstallasjon</option>
+            <option>Elbil-lader</option>
+            <option>Sikringsskap</option>
+            <option>Næringsbygg</option>
+            <option>Belysning</option>
+            <option>Alarm &amp; sikring</option>
+            <option>Annet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Beskriv oppdraget</label>
+          <textarea class="form-textarea form-input" placeholder="Fortell litt om hva du trenger hjelp med..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send forespørsel ⚡</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- KART -->
+<section id="kart">
+  <div class="section-header fade-in">
+    <div class="section-label">Finn oss</div>
+    <h2 class="section-title">Vår lokasjon</h2>
+  </div>
+  <div class="map-grid">
+    <div class="map-info fade-in">
+      <h3>Nikolai Elektro AS</h3>
+      <div class="map-info-item">
+        <div class="label">Besøksadresse</div>
+        <div class="value">Verkstedveien 7<br/>4033 Stavanger</div>
+      </div>
+      <div class="map-info-item">
+        <div class="label">Org.nummer</div>
+        <div class="value">NO 912 345 678 MVA</div>
+      </div>
+      <div class="map-info-item">
+        <div class="label">Serviceområde</div>
+        <div class="value">Stavanger, Sandnes, Sola, Randaberg og omegn</div>
+      </div>
+      <div class="map-info-item">
+        <div class="label">Åpningstider</div>
+        <div class="value">Mandag–Fredag: 07:00–17:00<br/>Lørdag: 09:00–13:00<br/>Søndag: Stengt</div>
+      </div>
+    </div>
+    <!-- Google Maps embed – bytt ut src med riktig adresse -->
+    <iframe
+      class="map-frame fade-in"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d64875.63956874153!2d5.673535!3d58.9699614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x463a35063740b449%3A0x5ec3b2dd1f1b5bab!2sStavanger!5e0!3m2!1sno!2sno!4v1700000000000"
+      allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Nikolai Elektro – kart"
+    ></iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo"><span>NIKOLAI</span> <span>ELEKTRO</span></div>
+      <p>Din pålitelige elektriker i Stavanger-regionen siden 2007. Godkjente fagfolk, ærlige priser og arbeid du kan stole på.</p>
+      <div class="footer-cert">⚡ DSB-autorisert elektroforetak</div>
+    </div>
+    <div>
+      <div class="footer-heading">Tjenester</div>
+      <ul class="footer-links">
+        <li><a href="#tjenester">Boliginstallasjon</a></li>
+        <li><a href="#tjenester">Elbil-lader</a></li>
+        <li><a href="#tjenester">Sikringsskap</a></li>
+        <li><a href="#tjenester">Næringsbygg</a></li>
+        <li><a href="#tjenester">Belysning</a></li>
+        <li><a href="#tjenester">Alarm &amp; sikring</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Selskapet</div>
+      <ul class="footer-links">
+        <li><a href="#hvorfor">Om oss</a></li>
+        <li><a href="#anmeldelser">Anmeldelser</a></li>
+        <li><a href="#bestilling">Kontakt</a></li>
+        <li><a href="#">Personvern</a></li>
+        <li><a href="#">Vilkår</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Kontakt</div>
+      <ul class="footer-links">
+        <li><a href="tel:+4751234567">📞 51 23 45 67</a></li>
+        <li><a href="mailto:post@nikolaielektro.no">✉️ post@nikolaielektro.no</a></li>
+        <li><a href="#">📍 Verkstedveien 7, Stavanger</a></li>
+        <li style="margin-top:1rem"><a href="tel:+4791001122">🚨 Akuttvakt: 91 00 11 22</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Nikolai Elektro AS. Alle rettigheter forbeholdt.</span>
+    <span>Laget med ⚡ i Stavanger</span>
+  </div>
+</footer>
+
+<!-- CALL BUTTON -->
+<a class="call-button" href="tel:+4751234567" aria-label="Ring oss">
+  <div class="call-button-label">Ring oss nå</div>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+  </svg>
+</a>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✅ Sendt! Vi ringer deg snart.';
+    btn.style.background = '#2ecc71';
+    btn.style.color = '#fff';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
