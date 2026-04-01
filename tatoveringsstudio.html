@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Profesjonelt tatoveringsstudio">
-  <title>Ink tattoo | Tatoveringer</title>
+  <title>Nikolai Tattoo | Tatoveringer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -499,6 +499,113 @@
     }
     .artist-ig:hover { color: var(--purple-light); }
 
+    /* ─── FORM ─── */
+    /* ─── BILDEOPPLASTING ─── */
+.file-upload-area {
+  position: relative;
+  border: 1px dashed var(--border);
+  border-radius: 2px;
+  background: var(--bg3);
+  transition: border-color 0.3s, background 0.3s;
+  overflow: hidden;
+}
+
+.file-upload-area.dragover {
+  border-color: var(--purple-mid);
+  background: rgba(107,33,168,0.08);
+}
+
+.file-upload-area input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.file-upload-ui {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 32px 20px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.file-upload-ui i {
+  font-size: 2rem;
+  color: var(--purple-mid);
+  opacity: 0.5;
+}
+
+.file-upload-ui p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.file-upload-ui span {
+  color: var(--purple-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.file-upload-ui small {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+}
+
+.file-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 12px 12px;
+}
+
+.file-preview-item {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.file-preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.file-preview-item .remove-file {
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 20px; height: 20px;
+  background: rgba(13,11,18,0.85);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: background 0.2s;
+  padding: 0;
+  width: 20px;
+}
+
+.file-preview-item .remove-file:hover {
+  background: rgba(180,30,30,0.9);
+}
     /* ─── PRICE ─── */
     #priser { background: var(--bg2); padding: 100px 5%; }
 
@@ -828,17 +935,43 @@
       nav { gap:1.2rem; }
       .gallery-item.large { grid-row:unset; }
     }
+      /* ── TRANSISTION ── */
+    /* Page transition overlay */
+.zoom-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-color);
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(1);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.zoom-overlay.zoom-out {
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+body.page-entering {
+    animation: pageEnter 0.5s ease forwards;
+}
+
+@keyframes pageEnter {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+}
   </style>
 </head>
 <body>
 
 <!-- ═══ HEADER ═══ -->
 <header id="topp">
-  <div class="logo">INK<span>studio</span></div>
+  <div class="logo">NIKOLAI<span> Studio</span></div>
   <nav>
     <a href="#galleri">Galleri</a>
     <a href="#tatovorer">Tatovører</a>
-    <a href="#priser">Priser</a>
+    <a href="#priser">Pris</a>
     <!-- ENDRE href til din Instagram-URL -->
  
   </nav>
@@ -849,9 +982,8 @@
   <div class="hero-text">
     <p class="hero-eyebrow">Oslo · Siden 2018</p>
     <h1>Tatovering<br>i <em>verdensklasse</em></h1>
-    <p class="hero-desc">Profesjonelle tatoveringer skreddersydd til deg – fra delikate linjer til store komposisjoner. Vi tar oss tid til å gjøre det riktig.</p>
     <div class="hero-actions">
-      <a href="#kontakt" class="btn btn-primary"><i class="fas fa-calendar-alt"></i> Kontakt på Instagram</a>
+      <a href="https://www.instagram.com" class="btn btn-primary"><i class="fas fa-calendar-alt"></i> Kontakt på Instagram</a>
       <a href="#galleri" class="btn btn-ghost">Se galleriet</a>
     </div>
   </div>
@@ -863,8 +995,8 @@
         <img src="din-bilde.jpg" alt="Tatovering">
       -->
       <div class="hero-img-placeholder">
-        <i class="fas fa-image"></i>
-        <p>Legg inn bilde her</p>
+        
+        <img src="images/tatvør1.png" style="height: 150%;">
       </div>
 
       <div class="hero-img-badge">
@@ -880,54 +1012,43 @@
   <div class="gallery-inner">
     <div class="section-header">
       <span class="section-label">Vårt arbeid</span>
-      <h2 class="section-title">Galleri <em>&</em> Eksempler</h2>
+      <h2 class="section-title">Galleri</h2>
       <p class="section-sub">Hvert bilde er unikt. Bla gjennom et utvalg av arbeidet vårt – og se hva vi kan skape for deg.</p>
     </div>
 
     <!--
-      SLIK LEGGER DU TIL BILDER:
-      Erstatt innholdet i hvert .gallery-item med:
-        <img src="din-fil.jpg" alt="Beskrivelse">
-      Eller legg til nye .gallery-item <div>-er i gridet.
-      Klassen .large på et item gjør det dobbelt så høyt.
+    
     -->
     <div class="gallery-grid">
 
-      <div class="gallery-item large reveal">
-        <!-- <img src="tattoo1.jpg" alt="Tatovering 1"> -->
+      <div class="gallery-item reveal reveal">
+        <img src="images/ulv.png" alt="Tatovering 1">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
+      </div>
+
+      <div class="gallery-item reveal reveal-delay-1">
+           <img src="images/hånd.jpg" alt="Tatovering 1">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
+      </div>
+
+      <div class="gallery-item reveal reveal-delay-2">
+        <img src="images/hånd2.jpeg" alt="Tatovering 1">
         <div class="gallery-placeholder"><i class="fas fa-plus"></i><span>Legg inn bilde</span></div>
         <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
       </div>
 
       <div class="gallery-item reveal reveal-delay-1">
-        <!-- <img src="tattoo2.jpg" alt="Tatovering 2"> -->
+        <img src="images/tattoo3.jpeg" alt="Tatovering 1">
         <div class="gallery-placeholder"><i class="fas fa-plus"></i><span>Legg inn bilde</span></div>
         <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
       </div>
 
       <div class="gallery-item reveal reveal-delay-2">
-        <!-- <img src="tattoo3.jpg" alt="Tatovering 3"> -->
+        <img src="images/back_tattoo.jpg" alt="Tatovering 1">
         <div class="gallery-placeholder"><i class="fas fa-plus"></i><span>Legg inn bilde</span></div>
         <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
       </div>
 
-      <div class="gallery-item reveal reveal-delay-1">
-        <!-- <img src="tattoo4.jpg" alt="Tatovering 4"> -->
-        <div class="gallery-placeholder"><i class="fas fa-plus"></i><span>Legg inn bilde</span></div>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
-      </div>
-
-      <div class="gallery-item reveal reveal-delay-2">
-        <!-- <img src="tattoo5.jpg" alt="Tatovering 5"> -->
-        <div class="gallery-placeholder"><i class="fas fa-plus"></i><span>Legg inn bilde</span></div>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
-      </div>
-
-      <div class="gallery-item reveal reveal-delay-3">
-        <!-- <img src="tattoo6.jpg" alt="Tatovering 6"> -->
-        <div class="gallery-placeholder"><i class="fas fa-plus"></i><span>Legg inn bilde</span></div>
-        <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
-      </div>
 
     </div>
   </div>
@@ -941,57 +1062,57 @@
     <p class="section-sub">Alle våre kunstnere har sin unike stil og spesialitet. Finn den som passer ditt prosjekt.</p>
   </div>
 
-  <!--
-    SLIK REDIGERER DU TATOVØRENE:
-    - Bytt ut .artist-photo-placeholder med <img src="foto.jpg" alt="Navn">
-    - Endre navn, stil, bio og Instagram-lenke
-    - Legg til eller fjern .artist-card blokker etter behov
-  -->
+
   <div class="artists-grid">
 
     <div class="artist-card reveal">
       <div class="artist-photo">
-        <!-- <img src="artist1.jpg" alt="Tatovør 1"> -->
-        <div class="artist-photo-placeholder"><i class="fas fa-user"></i></div>
+        <img src="images/tatvør1.png" alt="Tatovør 1">
       </div>
       <div class="artist-info">
         <h3 class="artist-name">Navn Navnesen</h3>
+        
         <p class="artist-style">Blackwork · Fine Line</p>
-        <p class="artist-bio">Kort beskrivelse om tatovøren, bakgrunn og spesialiteter. Bytt ut denne teksten.</p>
+        <p class="artist-bio">Kort beskrivelse om tatovøren, bakgrunn og spesialiteter.</p>
         <a href="https://www.instagram.com/TATOVØR_1" target="_blank" class="artist-ig">
           <i class="fab fa-instagram"></i> @tatovør_1
         </a>
       </div>
     </div>
 
+
+
+
     <div class="artist-card reveal reveal-delay-1">
       <div class="artist-photo">
-        <!-- <img src="artist2.jpg" alt="Tatovør 2"> -->
+        <img src="images/tatovør2.jpg" alt="Tatovør 2">
         <div class="artist-photo-placeholder"><i class="fas fa-user"></i></div>
       </div>
       <div class="artist-info">
         <h3 class="artist-name">Navn Navnesen</h3>
-        <p class="artist-style">Neotraditional · Color</p>
-        <p class="artist-bio">Kort beskrivelse om tatovøren, bakgrunn og spesialiteter. Bytt ut denne teksten.</p>
+        <p class="artist-style">Blackwork · Fine Line</p>
+        <p class="artist-bio">Kort beskrivelse om tatovøren, bakgrunn og spesialiteter.</p>
         <a href="https://www.instagram.com/TATOVØR_2" target="_blank" class="artist-ig">
           <i class="fab fa-instagram"></i> @tatovør_2
         </a>
       </div>
     </div>
+    
 
     <div class="artist-card reveal reveal-delay-2">
       <div class="artist-photo">
-        <!-- <img src="artist3.jpg" alt="Tatovør 3"> -->
+        <img src="images/tatovør3.jpg" alt="Tatovør 3">
         <div class="artist-photo-placeholder"><i class="fas fa-user"></i></div>
       </div>
       <div class="artist-info">
         <h3 class="artist-name">Navn Navnesen</h3>
         <p class="artist-style">Japanese · Geometric</p>
-        <p class="artist-bio">Kort beskrivelse om tatovøren, bakgrunn og spesialiteter. Bytt ut denne teksten.</p>
+        <p class="artist-bio">Kort beskrivelse om tatovøren, bakgrunn og spesialiteter.</p>
         <a href="https://www.instagram.com/TATOVØR_3" target="_blank" class="artist-ig">
           <i class="fab fa-instagram"></i> @tatovør_3
         </a>
       </div>
+    </div>
     </div>
 
   </div>
@@ -1016,10 +1137,8 @@
         <li>Prisen varierer etter størrelse, plassering og kompleksitet</li>
         <li>Gratis konsultasjon og designgjennomgang</li>
         <li>Inkluderer etterbehandling og oppfølging</li>
-        <li>Depositum på kr 500 ved booking – trekkes fra totalsum</li>
-        <li>Touch-up inkludert innen 3 måneder etter tatovering</li>
       </ul>
-      <a href="#kontakt" class="btn btn-primary"><i class="fab fa-instagram"></i> </i> Bestill konsultasjon</a>
+      <a href="https://www.instagram.com" class="btn btn-primary"><i class="fab fa-instagram"></i> </i> Bestill konsultasjon</a>
     </div>
   </div>
 </section>
@@ -1074,31 +1193,80 @@
   </div>
 </section>
 
+<!-- ═══ KONTAKT OG KART ═══ -->
+<div class="contact-form-wrap reveal reveal-delay-1">
+  <h3 class="form-title">Send en forespørsel</h3>
+  <form id="contactForm" action="https://formspree.io/f/xxxxxxxx" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label>Navn</label>
+      <input type="text" name="navn" placeholder="Ditt fulle navn" required>
+    </div>
+    <div class="form-group">
+      <label>E-post</label>
+      <input type="email" name="epost" placeholder="din@epost.no" required>
+    </div>
+    <div class="form-group">
+      <label>Tatovør (valgfritt)</label>
+      <select name="tatovør">
+        <option value="">– Ingen preferanse –</option>
+        <option>Tatovør 1</option>
+        <option>Tatovør 2</option>
+        <option>Tatovør 3</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Beskrivelse av tatoveringen</label>
+      <textarea name="beskrivelse" placeholder="Fortell om ideen din – størrelse, stil, plassering på kroppen..."></textarea>
+    </div>
 
+    <!-- BILDEOPPLASTING -->
+    <div class="form-group">
+      <label>Motiv / referansebilde (valgfritt)</label>
+      <div class="file-upload-area" id="uploadArea">
+        <input type="file" name="motiv" id="fileInput" accept="image/*" multiple>
+        <div class="file-upload-ui" id="uploadUI">
+          <i class="fas fa-image"></i>
+          <p>Dra og slipp bilde her, eller <span>klikk for å velge</span></p>
+          <small>JPG, PNG, HEIC – maks 10 MB per fil</small>
+        </div>
+        <div class="file-preview" id="filePreview"></div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">
+      <i class="fas fa-paper-plane"></i> &nbsp; Send forespørsel
+    </button>
+  </form>
+</div>
+
+<br><br><br>
+<section id="kart">
   <div class="section-header centered">
-    <span class="section-label">Beliggenhet</span>
-    <h2 class="section-title">I hjertet av <em>Grunerløkka</em></h2>
+    <span class="section-label">Sentral beliggenhet</span>
+    <h2 class="section-title">I hjertet av <em>Oslo</em></h2>
   </div>
+
+
+
+
+  
 <!-- KART – bytt ut embed-URLen med din faktiske adresse -->
 <div class="map-wrap">
   <div class="map-container reveal">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2043.0!2d5.7331!3d58.9700!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x463a3501b6c27a05%3A0x8dc95c3e0e0b4d5!2sStavanger!5e0!3m2!1sno!2sno!4v1680000000000!5m2!1sno!2sno"
-      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-      title="Kart – studiets beliggenhet">
-    </iframe>
-  </div>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1999.5899027271296!2d10.75913947705717!3d59.922353174906945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46416e67d960069d%3A0x95347144a20bd862!2sSofienberggata%2012%2C%200558%20Oslo!5e0!3m2!1sen!2sno!4v1775081324637!5m2!1sen!2sno" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  </div>
 </div>
+
+</section>
 
 
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <div class="logo">INK<span>studio</span></div>
-      <p class="footer-tagline">Profesjonelle tatoveringer med sjel. Vi skaper varig kunst – med omsorg for deg og kroppen din.</p>
+      <div class="logo">NIKOLAI<span>studio</span></div>
+      
       <!-- ENDRE TIL DIN INSTAGRAM -->
-      <a href="https://www.instagram.com/DITT_BRUKERNAVN" target="_blank" class="footer-ig">
+      <a href="https://www.instagram.com" target="_blank" class="footer-ig">
         <i class="fab fa-instagram"></i> Følg oss på Instagram
       </a>
     </div>
@@ -1117,7 +1285,7 @@
   </div>
 
   <div class="footer-bottom">
-    <span>© 2026 INK Studio · Org.nr: 123 456 789</span>
+    <span>© 2026 Nikolais Tattoos Studio · Org.nr: 123 456 789</span>
     <span>Alle rettigheter reservert</span>
   </div>
 </footer>
@@ -1163,6 +1331,72 @@
       this.reset();
     }, 4000);
   });
+
+  // Bildeopplasting – forhåndsvisning og dra-og-slipp
+const uploadArea = document.getElementById('uploadArea');
+const fileInput  = document.getElementById('fileInput');
+const filePreview = document.getElementById('filePreview');
+const uploadUI   = document.getElementById('uploadUI');
+let selectedFiles = [];
+
+fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+uploadArea.addEventListener('dragover', e => {
+  e.preventDefault();
+  uploadArea.classList.add('dragover');
+});
+
+uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+
+uploadArea.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadArea.classList.remove('dragover');
+  handleFiles(e.dataTransfer.files);
+});
+
+function handleFiles(files) {
+  Array.from(files).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    if (file.size > 10 * 1024 * 1024) return; // maks 10MB
+
+    selectedFiles.push(file);
+
+    const item = document.createElement('div');
+    item.className = 'file-preview-item';
+
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.onload = () => URL.revokeObjectURL(img.src);
+
+    const btn = document.createElement('button');
+    btn.className = 'remove-file';
+    btn.type = 'button';
+    btn.innerHTML = '✕';
+    btn.onclick = () => {
+      selectedFiles = selectedFiles.filter(f => f !== file);
+      item.remove();
+      if (filePreview.children.length === 0) uploadUI.style.display = '';
+    };
+
+    item.appendChild(img);
+    item.appendChild(btn);
+    filePreview.appendChild(item);
+    uploadUI.style.display = 'none';
+  });
+}
+// Page zoom transition
+document.body.insertAdjacentHTML('beforeend', '<div class="zoom-overlay"></div>');
+const overlay = document.querySelector('.zoom-overlay');
+document.body.classList.add('page-entering');
+
+document.querySelectorAll('a.page-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        overlay.classList.add('zoom-out');
+        setTimeout(() => { window.location.href = href; }, 420);
+    });
+});
 </script>
 </body>
 </html>
