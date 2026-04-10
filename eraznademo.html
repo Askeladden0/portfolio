@@ -994,7 +994,7 @@ body.page-entering {
     <div class="hero-img-frame">
       <div class="hero-img-placeholder">
         <!-- BYTT ut med bilde fra Timber Tattoo Instagram -->
-        <img src="erazna.jpg" style="height: 150%;">
+        <img src="images/erazna.jpg" style="height: 150%;">
       </div>
       <div class="hero-img-badge">
         <strong>+500</strong>
@@ -1050,21 +1050,74 @@ body.page-entering {
     </div>
   </div>
 </section>
+<style>
+  /* Responsive layout for the main container */
+  .team-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Stacks to 1 column on mobile */
+    gap: 40px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
 
-<!-- ═══ TATOVØRER ═══ -->
+  /* Experience badge positioning */
+  .exp-badge {
+    position: absolute;
+    bottom: -16px; 
+    right: 16px; /* Safer placement for mobile to prevent overflow */
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 18px 24px;
+    border-radius: 2px;
+    min-width: 160px;
+    z-index: 2;
+  }
+
+  /* Stats grid responsiveness */
+  .stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    margin-bottom: 36px;
+    overflow: hidden;
+  }
+
+  /* Desktop layout overrides */
+  @media (min-width: 768px) {
+    .team-container {
+      grid-template-columns: 1fr 1fr; /* Switches back to 2 columns on larger screens */
+      gap: 60px;
+    }
+    .exp-badge {
+      bottom: 28px;
+      right: -24px; /* Your original desktop positioning */
+    }
+  }
+
+  /* Stack stats on very small phones so the text doesn't overlap */
+  @media (max-width: 400px) {
+    .stats-container {
+      grid-template-columns: 1fr; 
+    }
+  }
+</style>
+
 <section id="tatovorer" class="section">
   <div class="section-header">
     <span class="section-label">Teamet vårt</span>
     <h2 class="section-title">Møt <em>tatovøren</em></h2>
   </div>
 
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; max-width:1100px;">
+  <div class="team-container">
     <div style="position:relative;">
       <div style="aspect-ratio:3/4; border-radius:2px; overflow:hidden; border:1px solid var(--border);">
-        <!-- BYTT src: last ned profilbilde fra @timbertattoo -->
-        <img src="erazna.jpg" alt="Erazna Tattoo tatovør" style="width:100%; height:100%; object-fit:cover; display:block;">
+        <img src="images/erazna.jpg" alt="Erazna Tattoo tatovør" style="width:100%; height:100%; object-fit:cover; display:block;">
       </div>
-      <div style="position:absolute; bottom:28px; right:-24px; background:var(--card); border:1px solid var(--border); padding:18px 24px; border-radius:2px; min-width:160px;">
+      <div class="exp-badge">
         <strong style="display:block; font-family:'Playfair Display',serif; font-size:2rem; font-weight:400; color:var(--purple-light); line-height:1;">8+</strong>
         <span style="font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted);">År erfaring</span>
       </div>
@@ -1080,7 +1133,7 @@ body.page-entering {
         Spesialiserer seg på detaljerte blackwork-design og skreddersydde motiver.
       </p>
 
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:2px; margin-bottom:36px; overflow:hidden;">
+      <div class="stats-container">
         <div style="background:var(--card); padding:20px 16px; text-align:center;">
           <strong style="display:block; font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:var(--text);">500+</strong>
           <span style="font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted);">Kunder</span>
@@ -1101,7 +1154,6 @@ body.page-entering {
     </div>
   </div>
 </section>
-
 
   <!-- Responsive -->
   <style>
