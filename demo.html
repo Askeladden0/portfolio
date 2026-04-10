@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Profesjonelt tatoveringsstudio">
+  <title>Timber Tattoo | Tatovering i Hønefoss</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+  --bg:        #0a0a0a;
+  --bg2:       #111111;
+  --bg3:       #1a1a1a;
+  --purple:    #f69090;
+  --purple-mid:#e88484;
+  --purple-light:#e06464;
+  --purple-glow:rgba(199, 66, 66, 0.3);
+  --gold:      #b8964a;
+  --gold-light:#d4af6e;
+  --text:      #f2f0ed;
+  --text-muted:#888888;
+  --card:      #141414;
+  --border:    rgba(255,255,255,0.08);
+  --shadow-glow: 0 0 30px rgba(155,26,26,0.2);
+}
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content:'';
+      position:fixed; inset:0; pointer-events:none; z-index:999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
+
+    /* ─── SCROLL ANIMATION ─── */
+    .reveal {
+      opacity:0;
+      transform: translateY(36px);
+      transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── HEADER ─── */
+    header {
+      position:sticky; top:0; z-index:100;
+      display:flex; justify-content:space-between; align-items:center;
+      padding: 18px 5%;
+      background: rgba(13,11,18,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      transition: padding 0.3s;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      background: linear-gradient(135deg, var(--purple-light), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo span {
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    nav { display:flex; gap:2.2rem; align-items:center; }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content:'';
+      position:absolute; bottom:-4px; left:0;
+      width:0; height:1px;
+      background: var(--purple-light);
+      transition: width 0.3s;
+    }
+
+    nav a:hover { color: var(--text); }
+    nav a:hover::after { width:100%; }
+
+    .nav-ig {
+      display:flex; align-items:center; gap:8px;
+      color: var(--text-muted) !important;
+      transition: color 0.3s;
+    }
+    .nav-ig:hover { color: var(--purple-light) !important; }
+    .nav-ig::after { display:none !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 80px 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background glow orbs */
+    .hero::before {
+      content:'';
+      position:absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(107,33,168,0.2) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      border-radius: 50%;
+      animation: orb-drift 12s ease-in-out infinite alternate;
+    }
+
+    .hero::after {
+      content:'';
+      position:absolute;
+      width:400px; height:400px;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+      bottom: 0; left: 0;
+      border-radius: 50%;
+      animation: orb-drift 16s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes orb-drift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(30px, 20px) scale(1.08); }
+    }
+
+    .hero-text {
+      position:relative; z-index:1;
+      animation: fade-up 1.1s cubic-bezier(.16,1,.3,1) both;
+    }
+
+    @keyframes fade-up {
+      from { opacity:0; transform:translateY(50px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--purple-light);
+    }
+
+    .hero-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 420px;
+      margin-bottom: 40px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-actions { display:flex; gap:16px; flex-wrap:wrap; }
+
+    .btn {
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 14px 30px;
+      border-radius: 2px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--purple), var(--purple-mid));
+      color: #fff;
+      box-shadow: 0 0 24px rgba(208, 57, 132, 0.4);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 40px rgba(199, 60, 90, 0.65);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--purple-light);
+      color: var(--text);
+      transform: translateY(-2px);
+    }
+
+    /* Hero image placeholder */
+    .hero-image {
+      position:relative; z-index:1;
+      display:flex; justify-content:center; align-items:center;
+      animation: fade-up 1.1s 0.2s cubic-bezier(.16,1,.3,1) both;
+    }
+
+    .hero-img-frame {
+      width: min(400px, 90%);
+      aspect-ratio: 3/4;
+      border-radius: 2px;
+      overflow:hidden;
+      position:relative;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-glow), inset 0 0 60px rgba(107,33,168,0.1);
+    }
+
+    /* Replace src below with your actual hero image */
+    .hero-img-frame img {
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .hero-img-placeholder {
+      width:100%; height:100%;
+      background: var(--bg3);
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      gap:12px; color: var(--text-muted);
+    }
+
+    .hero-img-placeholder i { font-size: 3rem; opacity:0.3; }
+    .hero-img-placeholder p { font-size:0.7rem; letter-spacing:0.2em; opacity:0.5; text-transform:uppercase; }
+
+    .hero-img-frame::after {
+      content:'';
+      position:absolute; inset:0;
+      background: linear-gradient(to top, rgba(13,11,18,0.6) 0%, transparent 50%);
+    }
+
+    .hero-img-badge {
+      position:absolute; bottom:24px; left:24px; z-index:2;
+      background: rgba(13,11,18,0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      padding: 12px 18px;
+      border-radius: 2px;
+    }
+    .hero-img-badge strong {
+      display:block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--purple-light);
+    }
+    .hero-img-badge span { font-size:0.65rem; color: var(--text-muted); letter-spacing:0.1em; }
+
+    /* Decorative line */
+    .divider {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, var(--purple-light), var(--gold));
+      margin: 0 auto 60px;
+    }
+
+    /* ─── SECTION BASE ─── */
+    .section {
+      padding: 100px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display:block;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-title em { color: var(--purple-light); font-style:italic; }
+
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      line-height: 1.7;
+      max-width: 500px;
+    }
+
+    .section-header {
+      margin-bottom: 60px;
+    }
+
+    .section-header.centered {
+      text-align: center;
+    }
+    .section-header.centered .section-sub { margin: 0 auto; }
+
+    /* ─── GALLERY (formerly Tjenester) ─── */
+    #galleri { background: var(--bg2); padding: 100px 5%; }
+
+    .gallery-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /*
+      GALLERY GRID
+      Legg til <img src="din-bilde.jpg"> inni hvert .gallery-item
+      Du kan legge til eller fjerne .gallery-item elementer fritt.
+    */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 3/4;
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(.16,1,.3,1), box-shadow 0.4s;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 60px rgba(107,33,168,0.3);
+    }
+
+    .gallery-item img {
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    /* Placeholder shown when no image is added */
+    .gallery-placeholder {
+      width:100%; height:100%;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      gap:10px; color: var(--text-muted);
+    }
+    .gallery-placeholder i { font-size:2.5rem; opacity:0.2; }
+    .gallery-placeholder span { font-size:0.62rem; letter-spacing:0.2em; opacity:0.4; text-transform:uppercase; }
+
+    .gallery-item-overlay {
+      position:absolute; inset:0;
+      background: linear-gradient(to top, rgba(13,11,18,0.8) 0%, transparent 55%);
+      opacity:0; transition: opacity 0.3s;
+      display:flex; align-items:flex-end; padding:20px;
+    }
+
+    .gallery-item:hover .gallery-item-overlay { opacity:1; }
+
+    .gallery-item-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: var(--text);
+      text-transform: uppercase;
+    }
+
+    /* featured item */
+    .gallery-item.large { grid-row: span 2; aspect-ratio: unset; }
+
+    /* ─── ARTISTS ─── */
+    #tatovorer { background: var(--bg); }
+
+    .artists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .artist-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(.16,1,.3,1);
+      position: relative;
+    }
+
+    .artist-card::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0;
+      height:2px;
+      background: linear-gradient(90deg, var(--purple), var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .artist-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-glow); }
+    .artist-card:hover::before { transform: scaleX(1); }
+
+    /* Artist photo: replace .artist-photo img src with actual photo */
+    .artist-photo {
+      width:100%;
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: var(--bg3);
+    }
+
+    .artist-photo img {
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      transition: transform 0.5s ease;
+    }
+    .artist-card:hover .artist-photo img { transform: scale(1.04); }
+
+    .artist-photo-placeholder {
+      width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, var(--bg3), rgba(107,33,168,0.1));
+    }
+    .artist-photo-placeholder i { font-size:4rem; color: var(--purple-mid); opacity:0.25; }
+
+    .artist-info { padding: 22px; }
+
+    .artist-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .artist-style {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--purple-light);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .artist-bio {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .artist-ig {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:0.72rem;
+      letter-spacing:0.1em;
+      color: var(--text-muted);
+      text-decoration:none;
+      transition: color 0.3s;
+    }
+    .artist-ig:hover { color: var(--purple-light); }
+
+    /* ─── FORM ─── */
+    /* ─── BILDEOPPLASTING ─── */
+.file-upload-area {
+  position: relative;
+  border: 1px dashed var(--border);
+  border-radius: 2px;
+  background: var(--bg3);
+  transition: border-color 0.3s, background 0.3s;
+  overflow: hidden;
+}
+
+.file-upload-area.dragover {
+  border-color: var(--purple-mid);
+  background: rgba(107,33,168,0.08);
+}
+
+.file-upload-area input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.file-upload-ui {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 32px 20px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.file-upload-ui i {
+  font-size: 2rem;
+  color: var(--purple-mid);
+  opacity: 0.5;
+}
+
+.file-upload-ui p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.file-upload-ui span {
+  color: var(--purple-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.file-upload-ui small {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+}
+
+.file-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 12px 12px;
+}
+
+.file-preview-item {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.file-preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.file-preview-item .remove-file {
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 20px; height: 20px;
+  background: rgba(13,11,18,0.85);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 0.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: background 0.2s;
+  padding: 0;
+  width: 20px;
+}
+
+.file-preview-item .remove-file:hover {
+  background: rgba(237, 103, 103, 0.9);
+}
+    /* ─── PRICE ─── */
+    #priser { background: var(--bg2); padding: 100px 5%; }
+
+    .price-inner { max-width:1400px; margin:0 auto; }
+
+    .price-single {
+      max-width: 680px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-single::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0;
+      height:2px;
+      background: linear-gradient(90deg, var(--purple), var(--purple-light), var(--gold));
+    }
+
+    .price-glow {
+      position:absolute;
+      width:300px; height:300px;
+      background: radial-gradient(circle, rgba(175, 47, 100, 0.12), transparent 70%);
+      top:50%; left:50%; transform:translate(-50%,-50%);
+      pointer-events:none;
+    }
+
+    .price-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+      margin: 24px 0 8px;
+    }
+
+    .price-amount span {
+      font-size: 1.8rem;
+      color: var(--text-muted);
+      vertical-align: super;
+    }
+
+    .price-note {
+      color: var(--purple-light);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+
+    .price-features {
+      list-style:none;
+      display:flex; flex-direction:column; gap:14px;
+      margin-bottom: 44px;
+      text-align:left;
+    }
+
+    .price-features li {
+      display:flex; align-items:center; gap:14px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .price-features li::before {
+      content:'';
+      width:20px; height:1px; flex-shrink:0;
+      background: linear-gradient(90deg, var(--purple-light), var(--gold));
+    }
+
+    /* ─── REVIEWS ─── */
+    #anmeldelser { background: var(--bg); }
+
+    .reviews-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap:24px;
+    }
+
+    .review-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius:2px;
+      padding:32px;
+      transition: all 0.3s;
+    }
+    .review-card:hover { border-color: rgba(139,63,207,0.4); box-shadow: 0 8px 40px rgba(107,33,168,0.15); }
+
+    .review-stars {
+      display:flex; gap:4px; margin-bottom:18px;
+    }
+    .review-stars i { color: var(--gold); font-size:0.8rem; }
+
+    .review-text {
+      font-family: 'Playfair Display', serif;
+      font-size:1.1rem;
+      font-style:italic;
+      color:var(--text);
+      line-height:1.7;
+      margin-bottom:24px;
+    }
+
+    .reviewer { display:flex; align-items:center; gap:12px; }
+    .reviewer i { font-size:2rem; color:var(--purple-mid); opacity:0.6; }
+    .reviewer strong { font-size:0.82rem; letter-spacing:0.1em; display:block; }
+    .reviewer small { font-size:0.7rem; color:var(--text-muted); letter-spacing:0.1em; }
+
+    /* ─── CONTACT ─── */
+    #kontakt { background: var(--bg2); padding:100px 5%; }
+    .contact-inner { max-width:1400px; margin:0 auto; }
+
+    .contact-layout {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:60px;
+      align-items:start;
+    }
+
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size:2rem;
+      font-weight:300;
+      margin-bottom:30px;
+    }
+
+    .contact-items { display:flex; flex-direction:column; gap:20px; }
+
+    .contact-item {
+      display:flex; align-items:flex-start; gap:16px;
+      padding:20px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:2px;
+      transition: border-color 0.3s;
+    }
+    .contact-item:hover { border-color: rgba(206, 84, 113, 0.4); }
+
+    .contact-item i { color:var(--purple-light); font-size:1.1rem; margin-top:2px; }
+
+    .contact-item-text strong { display:block; font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
+    .contact-item-text p, .contact-item-text a { font-size:0.9rem; color:var(--text); text-decoration:none; }
+    .contact-item-text a:hover { color:var(--purple-light); }
+
+    .contact-form-wrap {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:2px;
+      padding:40px;
+    }
+
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size:1.6rem;
+      font-weight:300;
+      margin-bottom:28px;
+    }
+
+    .form-group { margin-bottom:18px; }
+
+    .form-group label {
+      display:block;
+      font-size:0.68rem;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color:var(--text-muted);
+      margin-bottom:7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width:100%;
+      padding:13px 16px;
+      background: var(--bg3);
+      border:1px solid var(--border);
+      border-radius:2px;
+      color:var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size:0.85rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline:none;
+      border-color: var(--purple-mid);
+      box-shadow: 0 0 0 3px rgba(107,33,168,0.15);
+    }
+
+    .form-group select option { background: var(--bg3); }
+    .form-group textarea { resize:vertical; min-height:110px; }
+
+    .btn-submit {
+      width:100%;
+      background: linear-gradient(135deg, var(--purple), var(--purple-mid));
+      color:#fff;
+      padding:15px;
+      border:none; border-radius:2px;
+      font-family: 'DM Sans', sans-serif;
+      font-size:0.75rem;
+      font-weight:600;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition: box-shadow 0.3s, transform 0.3s;
+      box-shadow: 0 0 24px rgba(188, 46, 79, 0.3);
+    }
+    .btn-submit:hover {
+      box-shadow: 0 0 44px rgba(207, 68, 75, 0.55);
+      transform: translateY(-2px);
+    }
+
+    /* ─── MAP ─── */
+    .map-wrap {
+      max-width:1400px; margin: 0 auto;
+      padding: 0 5% 80px;
+    }
+
+    .map-container {
+      border-radius:2px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .map-container iframe {
+      width:100%; height:360px;
+      border:none; display:block;
+      filter: invert(90%) hue-rotate(175deg) brightness(0.75) saturate(0.8);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg);
+      border-top:1px solid var(--border);
+      padding: 60px 5% 24px;
+    }
+
+    .footer-grid {
+      max-width:1400px; margin:0 auto;
+      display:grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap:50px;
+      margin-bottom:50px;
+    }
+
+    .footer-brand .logo { font-size:1.6rem; }
+
+    .footer-tagline {
+      font-size:0.8rem;
+      color:var(--text-muted);
+      line-height:1.7;
+      margin-top:16px;
+      max-width:280px;
+      letter-spacing:0.04em;
+    }
+
+    .footer-ig {
+      display:inline-flex; align-items:center; gap:8px;
+      margin-top:20px;
+      color:var(--text-muted);
+      text-decoration:none;
+      font-size:0.75rem;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      transition:color 0.3s;
+      border:1px solid var(--border);
+      padding:9px 16px;
+      border-radius:2px;
+    }
+    .footer-ig:hover { color:var(--purple-light); border-color:rgba(139,63,207,0.5); }
+
+    .footer-col h4 {
+      font-size:0.68rem;
+      letter-spacing:0.25em;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:20px;
+    }
+
+    .footer-col a {
+      display:block;
+      color:var(--text-muted);
+      text-decoration:none;
+      font-size:0.8rem;
+      margin-bottom:10px;
+      letter-spacing:0.05em;
+      transition:color 0.3s;
+    }
+    .footer-col a:hover { color:var(--text); }
+
+    .footer-col p {
+      color:var(--text-muted);
+      font-size:0.8rem;
+      line-height:1.8;
+      letter-spacing:0.05em;
+    }
+
+    .footer-bottom {
+      max-width:1400px; margin:0 auto;
+      display:flex; justify-content:space-between; align-items:center;
+      padding-top:24px;
+      border-top:1px solid var(--border);
+      font-size:0.7rem;
+      color:var(--text-muted);
+      letter-spacing:0.1em;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width:900px) {
+      .hero { grid-template-columns:1fr; text-align:center; padding:80px 5% 60px; }
+      .hero-desc { margin:0 auto 40px; }
+      .hero-actions { justify-content:center; }
+      .hero-image { margin-top:50px; }
+      .contact-layout { grid-template-columns:1fr; }
+      .footer-grid { grid-template-columns:1fr; gap:30px; }
+      .footer-bottom { flex-direction:column; gap:10px; text-align:center; }
+    }
+
+    @media (max-width:600px) {
+      nav { gap:1.2rem; }
+      .gallery-item.large { grid-row:unset; }
+    }
+      /* ── TRANSISTION ── */
+    /* Page transition overlay */
+.zoom-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-color);
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(1);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.zoom-overlay.zoom-out {
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+body.page-entering {
+    animation: pageEnter 0.5s ease forwards;
+}
+
+@keyframes pageEnter {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+}
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header id="topp">
+  <div class="logo">TIMBER<span> Tattoo</span></div>
+  <nav>
+    <a href="#galleri">Galleri</a>
+    <a href="#tatovorer">Tatovør</a>
+    <a href="#priser">Pris</a>
+    <a href="mailto:kfotattoo@gmail.com" class="btn btn-primary" style="padding:9px 20px; font-size:0.7rem;">
+      <i class="fas fa-envelope"></i> Kontakt på mail
+    </a>
+  </nav>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hjem">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Hønefoss · Siden 2018</p>
+    <h1>Tatovering<br>i <em>verdensklasse</em></h1>
+    <div class="hero-actions">
+      <a href="#kontakt" class="btn btn-primary">
+        <i class="fas fa-envelope"></i> Send forespørsel
+      </a>
+      <a href="#galleri" class="btn btn-ghost">Se galleriet</a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <div class="hero-img-frame">
+      <div class="hero-img-placeholder">
+        <!-- BYTT ut med bilde fra Timber Tattoo Instagram -->
+        <img src="kjetil.png" style="height: 150%;">
+      </div>
+      <div class="hero-img-badge">
+        <strong>+500</strong>
+        <span>Fornøyde kunder</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALLERI ═══ -->
+<section id="galleri">
+  <div class="gallery-inner">
+    <div class="section-header">
+      <span class="section-label">Vårt arbeid</span>
+      <h2 class="section-title">Galleri</h2>
+      <p class="section-sub">Hvert bilde er unikt. Bla gjennom et utvalg av arbeidet vårt – og se hva vi kan skape for deg.</p>
+    </div>
+
+    <!--
+    
+    -->
+    <div class="gallery-grid">
+
+      <div class="gallery-item reveal reveal">
+        <img src="images/ulv.png" alt="Tatovering 1">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
+      </div>
+
+      <div class="gallery-item reveal reveal-delay-1">
+           <img src="images/hånd.jpg" alt="Tatovering 1">
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
+      </div>
+
+      <div class="gallery-item reveal reveal-delay-2">
+        <img src="images/hånd2.jpeg" alt="Tatovering 1">
+        <div class="gallery-placeholder"><i class="fas fa-plus"></i><span>Legg inn bilde</span></div>
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
+      </div>
+
+      <div class="gallery-item reveal reveal-delay-1">
+        <img src="images/tattoo3.jpeg" alt="Tatovering 1">
+        <div class="gallery-placeholder"><i class="fas fa-plus"></i><span>Legg inn bilde</span></div>
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
+      </div>
+
+      <div class="gallery-item reveal reveal-delay-2">
+        <img src="images/back_tattoo.jpg" alt="Tatovering 1">
+        <div class="gallery-placeholder"><i class="fas fa-plus"></i><span>Legg inn bilde</span></div>
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Stil · Tatovør</span></div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TATOVØRER ═══ -->
+<section id="tatovorer" class="section">
+  <div class="section-header">
+    <span class="section-label">Teamet vårt</span>
+    <h2 class="section-title">Møt <em>tatovøren</em></h2>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; max-width:1100px;">
+    <div style="position:relative;">
+      <div style="aspect-ratio:3/4; border-radius:2px; overflow:hidden; border:1px solid var(--border);">
+        <!-- BYTT src: last ned profilbilde fra @timbertattoo -->
+        <img src="kjetil.png" alt="Timber Tattoo tatovør" style="width:100%; height:100%; object-fit:cover; display:block;">
+      </div>
+      <div style="position:absolute; bottom:28px; right:-24px; background:var(--card); border:1px solid var(--border); padding:18px 24px; border-radius:2px; min-width:160px;">
+        <strong style="display:block; font-family:'Playfair Display',serif; font-size:2rem; font-weight:400; color:var(--purple-light); line-height:1;">8+</strong>
+        <span style="font-size:0.68rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--text-muted);">År erfaring</span>
+      </div>
+    </div>
+
+    <div>
+      <p style="font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:14px;">Tatoveringsstil· Tatoveringsstil</p>
+      <h3 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:400; line-height:1.1; margin-bottom:24px;">Kjetil <em style="color:var(--purple-light);">Olsen</em></h3>
+      <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.85; margin-bottom:16px;">
+        Kort beskrivelse om tatovøren – bakgrunn, hva som inspirerer dem, og hva de brenner for.
+      </p>
+      <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.85; margin-bottom:36px;">
+        Spesialiserer seg på detaljerte blackwork-design og skreddersydde motiver.
+      </p>
+
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:2px; margin-bottom:36px; overflow:hidden;">
+        <div style="background:var(--card); padding:20px 16px; text-align:center;">
+          <strong style="display:block; font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:var(--text);">500+</strong>
+          <span style="font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted);">Kunder</span>
+        </div>
+        <div style="background:var(--card); padding:20px 16px; text-align:center;">
+          <strong style="display:block; font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:var(--text);">Hønefoss</strong>
+          <span style="font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted);">Basert</span>
+        </div>
+        <div style="background:var(--card); padding:20px 16px; text-align:center;">
+          <strong style="display:block; font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:400; color:var(--text);">2016</strong>
+          <span style="font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted);">Siden</span>
+        </div>
+      </div>
+
+      <a href="https://www.instagram.com/timbertattoo" target="_blank" class="artist-ig" style="font-size:0.8rem; padding:12px 0;">
+        <i class="fab fa-instagram"></i> @timbertattoo
+      </a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Responsive -->
+  <style>
+    @media (max-width:800px) {
+      #tatovorer .section > div[style*="grid-template-columns:1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+      #tatovorer div[style*="right:-24px"] {
+        right: 16px !important;
+      }
+    }
+  </style>
+
+</section>
+
+<!-- ═══ PRISER ═══ -->
+<section id="priser">
+  <div class="price-inner">
+    <div class="section-header centered">
+      <span class="section-label">Prisinformasjon</span>
+      <h2 class="section-title">Enkel og <em>ærlig</em> prising</h2>
+      <p class="section-sub">Vi gir deg alltid et estimat før vi begynner. Ingen skjulte kostnader.</p>
+    </div>
+
+    <div class="price-single reveal">
+      <div class="price-glow"></div>
+      <span class="section-label">Startpris</span>
+      <div class="price-amount"><span>kr</span>1500</div>
+      <br>
+      <p class="price-note">Alle tatoveringer – fra kr 1 500</p>
+      <ul class="price-features">
+        <li>Prisen varierer etter størrelse, plassering og kompleksitet</li>
+        <li>Gratis konsultasjon og designgjennomgang</li>
+        <li>Inkluderer etterbehandling og oppfølging</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ANMELDELSER ═══ -->
+<section id="anmeldelser" class="section">
+  <div class="section-header centered">
+    <span class="section-label">Tilbakemeldinger</span>
+    <h2 class="section-title">Hva <em>kundene</em> sier</h2>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+      <p class="review-text">"Absolutt best i klassen. Lyttet nøye til hva jeg ville ha og leverte noe enda bedre. Fantastisk resultat!"</p>
+      <div class="reviewer">
+        <i class="fas fa-user-circle"></i>
+        <div>
+          <strong>Kari Olsen</strong>
+          <small>Oslo</small>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-1">
+      <div class="review-stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+      <p class="review-text">"Profesjonell, hyggelig og veldig dyktig. Følte meg trygg gjennom hele prosessen. Anbefaler på det sterkeste!"</p>
+      <div class="reviewer">
+        <i class="fas fa-user-circle"></i>
+        <div>
+          <strong>Lars Bakke</strong>
+          <small>Sandnes</small>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-2">
+      <div class="review-stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+      <p class="review-text">"Kom med en vag idé og gikk ut med noe som overgikk alle forventninger. Utrolig kreativt og presist arbeid."</p>
+      <div class="reviewer">
+        <i class="fas fa-user-circle"></i>
+        <div>
+          <strong>Marte Vik</strong>
+          <small>Hønefoss</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KONTAKT OG KART ═══ -->
+<div class="contact-form-wrap reveal reveal-delay-1">
+  <h3 class="form-title">Send en forespørsel</h3>
+  <form id="contactForm" action="https://formspree.io/f/xxxxxxxx" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label>Navn</label>
+      <input type="text" name="navn" placeholder="Ditt fulle navn" required>
+    </div>
+    <div class="form-group">
+      <label>E-post</label>
+      <input type="email" name="epost" placeholder="din@epost.no" required>
+    </div>
+
+    <div class="form-group">
+      <label>Beskrivelse av tatoveringen</label>
+      <textarea name="beskrivelse" placeholder="Fortell om ideen din – størrelse, stil, plassering på kroppen..."></textarea>
+    </div>
+
+    <!-- BILDEOPPLASTING -->
+    <div class="form-group">
+      <label>Motiv / referansebilde (valgfritt)</label>
+      <div class="file-upload-area" id="uploadArea">
+        <input type="file" name="motiv" id="fileInput" accept="image/*" multiple>
+        <div class="file-upload-ui" id="uploadUI">
+          <i class="fas fa-image"></i>
+          <p>Dra og slipp bilde her, eller <span>klikk for å velge</span></p>
+          <small>JPG, PNG, HEIC – maks 10 MB per fil</small>
+        </div>
+        <div class="file-preview" id="filePreview"></div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">
+      <i class="fas fa-paper-plane"></i> &nbsp; Send forespørsel
+    </button>
+  </form>
+</div>
+
+<br><br><br>
+<section id="kart">
+  <div class="section-header centered">
+    <span class="section-label">Sentral beliggenhet</span>
+    <h2 class="section-title">I hjertet av <em>Hønefoss</em></h2>
+  </div>
+
+
+
+
+  
+<!-- KART – bytt ut embed-URLen med din faktiske adresse -->
+<div class="map-wrap">
+  <div class="map-container reveal">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1985.0125772392!2d10.252368076744718!3d60.163970643934704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4641074734cf77b5%3A0x883dffbc088508fa!2sTimber%20Tattoo!5e0!3m2!1sit!2sno!4v1775834196957!5m2!1sit!2sno" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+
+</section>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">Timber<span>Tattoo</span></div>
+      
+      <!-- ENDRE TIL DIN INSTAGRAM -->
+      <a href="https://www.instagram.com/timbertattoo/" target="_blank" class="footer-ig">
+        <i class="fab fa-instagram"></i> Følg oss på Instagram
+      </a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Navigasjon</h4>
+      <a href="#galleri">Galleri</a>
+      <a href="#tatovorer">Tatovører</a>
+      <a href="#priser">Pris</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Åpningstider</h4>
+      <p>Tirsdag – fredag: 11:00–19:00<br>Lørdag: 11:00–17:00<br>Søndag – mandag: Stengt</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 Timber Tattoo · Org.nr: 123 456 789</span>
+    <span>Alle rettigheter reservert</span>
+  </div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════
+// KONFIGURASJON – endre tekst her uten å røre HTML
+// ═══════════════════════════════════════════════
+const STUDIO = {
+  navn: "Timber Tattoo",
+  by: "Hønefoss",
+  instagram: "https://www.instagram.com/timbertattoo",
+  instagramHandle: "@timbertattoo",
+  kontaktMail: "kfotattoo@gmail.com",
+  adresse: "Norderhovsgata 19, 3510 Hønefoss",
+  siden: "2018",
+  orgNr: "123 456 789",
+  aar: "2026",
+};
+
+// Oppdater alle steder navn/by/lenker brukes
+document.querySelectorAll('.studio-navn').forEach(el => el.textContent = STUDIO.navn);
+document.querySelectorAll('.studio-by').forEach(el => el.textContent = STUDIO.by);
+document.querySelectorAll('.studio-adresse').forEach(el => el.textContent = STUDIO.adresse);
+document.querySelectorAll('.studio-ig-link').forEach(el => el.href = STUDIO.instagram);
+document.querySelectorAll('.studio-ig-handle').forEach(el => el.textContent = STUDIO.instagramHandle);
+document.querySelectorAll('.studio-mail-link').forEach(el => {
+  el.href = "mailto:" + STUDIO.kontaktMail;
+  el.textContent = STUDIO.kontaktMail;
+});
+document.querySelector('.footer-bottom span:first-child').textContent =
+  `© ${STUDIO.aar} ${STUDIO.navn} · Org.nr: ${STUDIO.orgNr}`;
+
+// ═══════════════════════════════════════════════
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // Sticky header shrink
+  window.addEventListener('scroll', () => {
+    const h = document.querySelector('header');
+    h.style.padding = window.scrollY > 80 ? '11px 5%' : '18px 5%';
+  });
+
+  // Form submit
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.btn-submit');
+    btn.textContent = '✓ Sendt! Vi tar kontakt snart.';
+    btn.style.background = 'linear-gradient(135deg, #1a5c38, #22a06b)';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> &nbsp; Send forespørsel';
+      btn.style.background = '';
+      this.reset();
+    }, 4000);
+  });
+
+  // Bildeopplasting
+  const uploadArea = document.getElementById('uploadArea');
+  const fileInput  = document.getElementById('fileInput');
+  const filePreview = document.getElementById('filePreview');
+  const uploadUI   = document.getElementById('uploadUI');
+  let selectedFiles = [];
+
+  fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+  uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+  uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+  uploadArea.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadArea.classList.remove('dragover');
+    handleFiles(e.dataTransfer.files);
+  });
+
+  function handleFiles(files) {
+    Array.from(files).forEach(file => {
+      if (!file.type.startsWith('image/')) return;
+      if (file.size > 10 * 1024 * 1024) return;
+      selectedFiles.push(file);
+      const item = document.createElement('div');
+      item.className = 'file-preview-item';
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      img.onload = () => URL.revokeObjectURL(img.src);
+      const btn = document.createElement('button');
+      btn.className = 'remove-file';
+      btn.type = 'button';
+      btn.innerHTML = '✕';
+      btn.onclick = () => {
+        selectedFiles = selectedFiles.filter(f => f !== file);
+        item.remove();
+        if (filePreview.children.length === 0) uploadUI.style.display = '';
+      };
+      item.appendChild(img);
+      item.appendChild(btn);
+      filePreview.appendChild(item);
+      uploadUI.style.display = 'none';
+    });
+  }
+
+  // Page zoom transition
+  document.body.insertAdjacentHTML('beforeend', '<div class="zoom-overlay"></div>');
+  const overlay = document.querySelector('.zoom-overlay');
+  document.body.classList.add('page-entering');
+  document.querySelectorAll('a.page-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const href = this.getAttribute('href');
+      overlay.classList.add('zoom-out');
+      setTimeout(() => { window.location.href = href; }, 420);
+    });
+  });
+</script>
+</body>
+</html>
